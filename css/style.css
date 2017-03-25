@@ -1,0 +1,35 @@
+
+
+.header{
+
+    width:100%;
+    border: 1px solid #4687f2;
+    height:70px;
+    background-color: #7eacf7;
+    display:inline-block;
+}
+
+.header img{
+    width:70px;
+    margin-top:.3%;
+    margin-left:3%;
+    float:left;
+}
+
+.header h3{
+    float:left;
+    display:block;
+    margin-left:3%;
+    font-weight: bolder;
+    color:white;
+    font-size: 30pt;
+    font-family: 'Baloo Bhaina', cursive;
+}
+
+.formHeader{
+    margin-left: 30%;
+}
+
+#btnTarget{
+    margin-top:13%;
+}
