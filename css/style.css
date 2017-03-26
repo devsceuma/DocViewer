@@ -33,3 +33,45 @@
 #btnTarget{
     margin-top:13%;
 }
+
+.projectConfiguration{
+    font-size: 16pt;
+    text-transform: uppercase;
+    font-weight: bolder;
+    background-color:#7eacf7;
+    text-align: center;
+}
+
+/*
+    SEPARAÇÃO DOS ELEMENTOS
+
+*/
+.class{
+    margin-top:10px;
+    font-size: 14pt;
+    font-weight: bolder;
+}
+
+.class .constructor p{
+    margin-top:10px;
+    color:red;
+    border: 1px solid red;
+}
+
+.class .constructor .parameters p{
+    border: 1px solid blue;
+    color:blue;
+}
+
+.methods{
+    margin-top:10px;
+    border: 1px solid green;
+}
+
+.spanClass{
+    float:right;
+    font-weight: normal;
+    font-size: 13px;
+    color:rgba(0,0,0,.6);
+    margin-left:5px;
+}

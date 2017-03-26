@@ -9,6 +9,7 @@ class LoaderController {
     _renderizeView(project){
         this._principalView.update(project);
     }
+    
 
     loadJsonByProject(event) {
         event.preventDefault();

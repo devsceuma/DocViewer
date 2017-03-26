@@ -8,24 +8,50 @@ class PrincipalView extends View{
 
     _template(model){
         return  `<div>
-                    ${model._classes.map(c=>
-                        `<p>${c._name} - Classe</p>
-                            ${c._constructors.map(con=>
-                                `<p>${con._description} - Construtor</p>
-                                    ${con._parameters.map(param=>
-                                        `<p>${param._name} - Parametros do Construtor</p>`    
-                                    ).join('')}`
-                            ).join('')}
-                            ${c._fields.map(f=>
-                                `<p>${f._name} - Field da Classe</p>`
-                            ).join('')}
-                            ${c._methods.map(m=>
-                                `<p>${m._name} - Método</p>
-                                 ${m._parameters.map(p=>
-                                    `<p>${p._name} - Parametro da Função</p>`
-                                ).join('')}`
-                            ).join('')}`
-                    ).join('')}
+                    <div class="projectConfiguration">
+                        <p>${model._name}</p>
+                    </div>
+                    ${this._generateClasses(model._classes)}
                 </div>`
     }
+
+    _generateClasses(classes){
+        return `${classes.map(c=>
+                    `<div class="class">
+                        <span class="spanClass"> | More Info </span>
+                        <span class="spanClass"> More Info </span>
+                        <p>${c._name} - Classe</p>
+                        ${this._generateConstructors(c)}
+                        ${this._generateMethods(c)}
+                     </div>`
+                ).join('')}`
+    }
+
+
+    _generateConstructors(classe){
+        return `${classe._constructors.map(c=>
+                    `<div class="constructor">
+                        <p> Construtor: ${c._description}</p>
+                        ${this._generateParameters(c)}
+                     </div>`
+                ).join('')}`
+    }
+
+    _generateMethods(classe){
+        return `${classe._methods.map(c=>
+                    `<div class="methods">
+                        <p> Método: ${c._description}</p>
+                        ${this._generateParameters(c)}
+                     </div>`
+                ).join('')}`
+    }
+
+    _generateParameters(methodOrConstructor){
+        return `${methodOrConstructor._parameters.map(p=>
+                    `<div class="parameters">
+                        <p> Parameters: ${p._name}</p>
+                     </div>`
+                ).join('')}`
+    }
+
 }
