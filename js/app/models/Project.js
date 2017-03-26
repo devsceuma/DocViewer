@@ -1,10 +1,15 @@
 class Project {
 
-    constructor(name, description, url) {
+    constructor(name, description, url, classes) {
         this._name = name;
         this._description = description;
         this._url = url;
         this._classes = [];
+
+        if(typeof classes != 'undefined'){
+            this._createClasses(classes);
+        }
+        
     }
 
     get name() { return this._name };
@@ -41,6 +46,7 @@ class Project {
         let constructors = [];
 
         clazz.constructors.forEach(constructor => {
+            parameters = [];
             constructor.parameters.forEach(p => {
                 parameters.push(new Parameter(p.name, p.description, p.type, p.optional));
             });
@@ -53,6 +59,7 @@ class Project {
         let parameters = [];
         let methods = [];
         clazz.methods.forEach(method => {
+            parameters = [];
             method.parameters.forEach(p => {
                 parameters.push(new Parameter(p.name,p.description,p.type,p.optional))
             });

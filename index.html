@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-2">
                         <label for="selectTarget">Eu quero:</label>
-                        <select class="form-control" id="selectTarget">
+                        <select class="form-control" id="selectTarget" onchange="">
                             <option>Projeto</option>
                             <option>Classe</option>
                             <option>Método</option>
@@ -30,7 +30,7 @@
                         <input type="text" id="wantTarget" class="form-control" />
                     </div>
                     <div class="col-md-3">
-                        <input type="submit" value="Buscar..." id="btnTarget" class="btn btn-success" onclick="loaderController.printarJson(event)"
+                        <input type="submit" value="Buscar..." id="btnTarget" class="btn btn-success" onclick="loaderController.loadJsonByProject(event)"
                         />
                     </div>
                 </div>
@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="docViewerPrincipal">
 
     </div>
 
@@ -48,7 +48,9 @@
     <script type="text/javascript" src="js/app/models/Field.js"></script>
     <script type="text/javascript" src="js/app/models/Constructor.js"></script>
     <script type="text/javascript" src="js/app/models/Class.js"></script>
+        <script type="text/javascript" src="js/app/view/View.js"></script>
     <script type="text/javascript" src="js/app/controllers/LoaderController.js"></script>
+    <script type="text/javascript" src="js/app/view/PrincipalView.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
         let loaderController = new LoaderController();

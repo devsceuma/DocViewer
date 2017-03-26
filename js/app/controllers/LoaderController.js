@@ -1,37 +1,35 @@
 class LoaderController {
 
     constructor() {
+        let $ = document.querySelector.bind(document);
         this._project = new Project;
+        this._principalView = new PrincipalView($("#docViewerPrincipal"));
     }
 
-    processJson(){
-        console.log(this._project);
+    _renderizeView(project){
+        this._principalView.update(project);
     }
 
-    printarJson(event) {
+    loadJsonByProject(event) {
         event.preventDefault();
-        this.loadJSON(response => {
-            let obj = JSON.parse(response);
-            this._project.name = obj.name;
-            this._project.description = obj.description;
-            this._project.url = obj.url;
-            this._project.classes = obj.classes;
+        this._getAsyncRequest(response => {
+            let promise = JSON.parse(response);
+            let project = new Project(promise.name,promise.description,promise.url,promise.classes);
+            this._renderizeView(project);
+            this._project = project;
         });
-
-        this.processJson();
     }
 
 
-    loadJSON(callback) {
+    _getAsyncRequest(callback) {
         let xobj = new XMLHttpRequest();
         xobj.overrideMimeType("application/json");
         xobj.open('GET', 'js/app/controllers/json.json', true);
         xobj.onreadystatechange = function () {
-            this._valuesJson = [];
             if (xobj.readyState == 4 && xobj.status == "200") {
                 callback(xobj.responseText);
             }
         };
-        xobj.send(this);
+        xobj.send(null);
     }
 }
