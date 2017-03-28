@@ -53,7 +53,7 @@ class PrincipalView extends View{
                             </div>
                         </div>
                         <div class="row">
-                            <div class="param-container${`-`+this._getClassMethodByType(c._typeRequest)}">
+                            <div class="col-md-12 param-container${`-`+this._getClassMethodByType(c._typeRequest)}">
                                 ${exibirParametros?this._generateParameters(c):''}
                             </div>
                         </div>
