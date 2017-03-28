@@ -41,7 +41,7 @@ class PrincipalView extends View{
     }
 
     _generateMethods(classe){
-        let exibirParametros = false;
+        let exibirParametros = true;
         return `${classe._methods.map(c=>
                     `<div class="methods">
                         <div class="row">
@@ -52,15 +52,19 @@ class PrincipalView extends View{
                                 <p>${c._url}<span class="methodSpan">${c._description}</span></p>
                             </div>
                         </div>
-                        ${exibirParametros?this._generateParameters(c):''}
+                        <div class="row">
+                            <div class="param-container${`-`+this._getClassMethodByType(c._typeRequest)}">
+                                ${exibirParametros?this._generateParameters(c):''}
+                            </div>
+                        </div>
                      </div>`
                 ).join('')}`
     }
 
     _generateParameters(methodOrConstructor){
         return `${methodOrConstructor._parameters.map(p=>
-                    `<div class="parameters">
-                        <p> Parameters: ${p._name}</p>
+                    `<div class="col-md-5 parameters${methodOrConstructor !=null ? `-`+this._getClassMethodByType(methodOrConstructor._typeRequest):'' }">
+                        <p>${p._name} | ${p._description} | ${p._type}</p>
                      </div>`
                 ).join('')}`
     }
@@ -88,6 +92,5 @@ class PrincipalView extends View{
             return "delete";
         }
     }
-
 
 }

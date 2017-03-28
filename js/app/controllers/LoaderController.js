@@ -33,4 +33,9 @@ class LoaderController {
         };
         xobj.send(null);
     }
+
+    _collapseEvent(target){
+        alert("oi");
+        console.log(target);
+    }
 }
