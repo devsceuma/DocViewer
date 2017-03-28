@@ -8,4 +8,9 @@ class View{
         this._element.innerHTML = '<div></div>';
         this._element.innerHTML = this._template(model);
     }
+
+    collapse(element){
+        console.log(element);
+        alert("Oi");
+    }
 }
