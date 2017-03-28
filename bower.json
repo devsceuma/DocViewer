@@ -2,7 +2,8 @@
   "name": "docviewer",
   "homepage": "https://github.com/devsceuma/DocViewer",
   "authors": [
-    "marcus <marcus.cartagenes@ceuma.br"
+    "marcus <marcus.cartagenes@ceuma.br>",
+    "werliton <werliton.carlos@ceuma.br>"
   ],
   "description": "App de documentação",
   "main": "",
