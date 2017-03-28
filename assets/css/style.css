@@ -23,7 +23,9 @@
     font-size: 30pt;
     font-family: 'Baloo Bhaina', cursive;
 }
-
+.img-logo{
+  margin-bottom:50%;
+}
 .formHeader{
     margin-left: 30%;
 }

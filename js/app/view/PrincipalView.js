@@ -7,10 +7,15 @@ class PrincipalView extends View{
     }
 
     _template(model){
-        return  `<div>
-                    <div class="projectConfiguration">
-                        <p>Projeto: ${model._name}</p>
-                    </div>
+        return  `<div class="row">
+					<div class="col-lg-12">
+						<h3 class="page-header"><i class="fa fa-laptop"></i>Projeto: ${model._name}</h3>
+						<ol class="breadcrumb">
+							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+							<li><i class="fa fa-laptop"></i>Projeto: teste</li>						  	
+						</ol>
+					</div>
+				</div>
                     ${this._generateClasses(model._classes)}
                 </div>`
     }
@@ -19,14 +24,36 @@ class PrincipalView extends View{
         let exibirConstrutor = false;
         let exibirMetodo = true;
         return `${classes.map(c=>
-                    `<div class="class">
-                        <span class="spanClass"> | Expand </span>
-                        <span class="spanClass"> Class Info </span>
-                        <p>${c._name} - Classe</p>
-                        <hr/>
-                        ${exibirConstrutor?this._generateConstructors(c):''}
-                        ${exibirMetodo?this._generateMethods(c):''}
-                     </div>`
+                    `
+                        
+                        
+                     					 
+		        <!--CLASSES-->
+				<div class="row">
+		          <div class="col-lg-12">
+		              <!--Project Activity start-->
+		              <section class="panel">
+		                  <div class="panel-body progress-panel">
+		                    <div class="row">
+		                      <div class="col-lg-8 task-progress pull-left">
+		                          <h1>${c._name} - Classe</h1>                                  
+		                      </div>
+		                      <div class="col-lg-4"></div>
+		                    </div>
+		                  </div><!-- /.panel-body-->
+						  
+						
+		                  <div class="panel-group m-bot20" id="accordion2">
+			                  <!--METHODS -->
+							  ${exibirConstrutor?this._generateConstructors(c):''}
+							  ${exibirMetodo?this._generateMethods(c):''}
+	                      </div><!-- /panel-group-->		                  
+		              </section><!-- /SECTION - PANEL-->
+		              <!--Project Activity end-->
+		          </div><!-- /col-lg-12-->
+		      </div><!-- /row-->
+		      <br><br>
+					 `
                 ).join('')}`
     }
 
@@ -43,43 +70,92 @@ class PrincipalView extends View{
     _generateMethods(classe){
         let exibirParametros = true;
         return `${classe._methods.map(c=>
-                    `<div class="methods">
-                        <div class="row">
-                            <div class="col-md-1">
-                                <div class="${this._getClassParameterByType(c._typeRequest)}">${c._typeRequest}</div>
-                            </div>
-                            <div class="col-md-10 col-xs-10 col-ls-10 method ${this._getClassMethodByType(c._typeRequest)}">
-                                <p>${c._url}<span class="methodSpan">${c._description}</span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 param-container${`-`+this._getClassMethodByType(c._typeRequest)}">
-                                ${exibirParametros?this._generateParameters(c):''}
-                            </div>
-                        </div>
-                     </div>`
+                    `<div class="${this._getClassParameterByType(c._typeRequest)}">
+	                              <div class="panel-heading">
+	                                  <h4 class="panel-title">
+	                                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+	                                         <i class="glyphicon glyphicon-export"></i>
+		                              <span class="badge bg-inverse"> ${c._typeRequest}</span>
+	                                      </a>
+	                                  </h4>
+	                              </div> <!-- /panel-heading -->
+	                              <div id="collapseFive" class="panel-collapse collapse">
+	                                  <div class="panel-body">
+									  <div class="list-group">
+										  <a href="#" class="list-group-item">
+										    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-link"></i> URL</h4>
+										    <p class="list-group-item-text text-primary">${c._url}</p><br>
+										    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-list-alt"></i> Description</h4>
+										    <p class="list-group-item-text text-success">${c._description}</p>
+										  </a>
+										</div><!-- /list-group-->
+									  
+	                                  <h2>Parameters <span class="badge">12</span></h2>
+	                                     <table class="table table-hover">
+	                                     	<thead>
+		                                     	<tr>
+							                      	  <th>Parameter</th>
+							                          <th>Description</th>
+							                          <th>Parameter Type</th>  
+							                    </tr>
+	                                     	</thead>
+						                      <tbody>		
+												<!-- Parametros -->
+						                      ${exibirParametros?this._generateParameters(c):''}
+						                      <!-- /Parametros -->
+						                      		                      
+						                      </tbody>
+						                  </table>
+						                  <hr/>
+										  <!-- RESPONSES -->
+	                                  		<h2>Responses <span class="badge">12</span></h2>
+
+		                                  		<div class="bs-callout bs-callout-success col-md-12">
+												  <h4>Default Callout</h4>
+												  This is a default callout.
+												</div>
+
+												<div class="bs-callout bs-callout-danger col-md-12">
+												  <h4>Default Callout</h4>
+												  {  
+								                     "name":"nome",
+								                     "description":"Nome do usuario teste para testar a funcao sobre quantidade maxima de caractere",
+								                     "type":"java.lang.String",
+								                     "optional":false
+								                  }
+												</div><!-- /.bs-callout-->
+										 <!-- /RESPONSES -->
+	                              </div><!-- /PANEL -BODY  -->
+								</div><!-- /collapseFive -->
+	                          </div><!-- /accordion-->`
                 ).join('')}`
     }
 
-    _generateParameters(methodOrConstructor){
+    _generateParameters(methodOrConstructor){	
+	
         return `${methodOrConstructor._parameters.map(p=>
-                    `<div class="col-md-5 parameters${methodOrConstructor !=null ? `-`+this._getClassMethodByType(methodOrConstructor._typeRequest):'' }">
-                        <p>${p._name} | ${p._description} | ${p._type}</p>
-                     </div>`
+                    `<tr>
+						  <td>
+							  <label class="label label-default">${p._name}</label>
+						  </td>
+						  <td>${p._description}</td>
+						  <td>${p._type}</td> 
+					 </tr>`
                 ).join('')}`
     }
 
     _getClassParameterByType(type){
         if(type === "GET"){
-            return "typeRequest classGET";
+            return "panel panel-success";
         }else if(type === "POST"){
-            return "typeRequest classPOST";
+            return "panel panel-info";
         }else if(type === "PUT"){
-            return "typeRequest classPUT";
+            return "panel panel-warning";
         }else if(type==="DELETE"){
-            return "typeRequest classDELETE";
+            return "panel panel-danger";
         }
     }
+	
 
     _getClassMethodByType(type){
         if(type === "GET"){
