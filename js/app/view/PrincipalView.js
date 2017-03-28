@@ -69,17 +69,19 @@ class PrincipalView extends View{
 
     _generateMethods(classe){
         let exibirParametros = true;
+		let i = 0;
         return `${classe._methods.map(c=>
-                    `<div class="${this._getClassParameterByType(c._typeRequest)}">
+					`<p style="display:none">${i++}</p>
+                    <div class="${this._getClassParameterByType(c._typeRequest)}">
 	                              <div class="panel-heading">
 	                                  <h4 class="panel-title">
-	                                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+	                                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive${"-"+i}">
 	                                         <i class="glyphicon glyphicon-export"></i>
-		                              <span class="badge bg-inverse"> ${c._typeRequest}</span>
+		                              <span class="badge bg-inverse"> / ${c._typeRequest}</span>
 	                                      </a>
 	                                  </h4>
 	                              </div> <!-- /panel-heading -->
-	                              <div id="collapseFive" class="panel-collapse collapse">
+	                              <div id="collapseFive${"-"+i}" class="panel-collapse collapse">
 	                                  <div class="panel-body">
 									  <div class="list-group">
 										  <a href="#" class="list-group-item">
@@ -94,9 +96,10 @@ class PrincipalView extends View{
 	                                     <table class="table table-hover">
 	                                     	<thead>
 		                                     	<tr>
-							                      	  <th>Parameter</th>
-							                          <th>Description</th>
-							                          <th>Parameter Type</th>  
+							                      	  <th>Nome</th>
+							                          <th>Descrição</th>
+							                          <th>Tipo</th>
+													  <th>Opcional</th>  
 							                    </tr>
 	                                     	</thead>
 						                      <tbody>		
@@ -139,7 +142,8 @@ class PrincipalView extends View{
 							  <label class="label label-default">${p._name}</label>
 						  </td>
 						  <td>${p._description}</td>
-						  <td>${p._type}</td> 
+						  <td>${p._type}</td>
+						  <td>${p._optional}</td> 
 					 </tr>`
                 ).join('')}`
     }
