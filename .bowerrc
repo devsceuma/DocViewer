@@ -1,0 +1,5 @@
+{
+	"directory":"assets",
+	"proxy": "http://4578:otel2017@proxy.ceuma.edu.br:3128",
+	"https-proxy": "http://4578:otel2017@proxy.ceuma.edu.br:3128"
+}
