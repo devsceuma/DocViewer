@@ -1,0 +1,24 @@
+{
+  "name": "docviewer",
+  "homepage": "https://github.com/devsceuma/DocViewer",
+  "authors": [
+    "marcus <marcus.cartagenes@ceuma.br"
+  ],
+  "description": "App de documentação",
+  "main": "",
+  "keywords": [
+    "doc"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
