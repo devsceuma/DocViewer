@@ -8,7 +8,7 @@ class LoaderController {
         this._principalView = new PrincipalView($("#docViewerPrincipal"));
         this._inputFiltro = $("#filtro");
         this._service = new Service();
-        Object.freeze(this);
+        //Object.freeze(this);
     }
 
     _renderizeView(project){
@@ -23,35 +23,21 @@ class LoaderController {
             let promise = JSON.parse(response);
             let project = new Project(promise.name,promise.description,promise.url,promise.classes);
             this._renderizeView(project);
-            //this._project = project;
-            this._filterProjects(project);
+            this._project = project;
         });
     }
 
-    _filterProjects(project){
+    filterProjects(){
         let filterValue = this._inputFiltro.value;
+        let tempProject = this._project;
 
-        console.log("teste"+project);
-        /*
-        let filtro = project.some(function(obj,i) {
-            let classes = obj.classes.some(function(){
-                return classes.name === "Sample";
-            });
-
+        let p = this._project._classes.filter(f=>{
+            return (f["_name"].toLowerCase().indexOf(filterValue.toLowerCase()) > -1);
         });
-        for(var i in project.classes){
-            //if(classes[i] == )
-            console.log("ACHEI::=>"+project.classes[i]);
-        }*/
-
-        project._classes.forEach(c=>{
-            console.log(c);
-        });
-
-       // console.log("ACHEI::=>");
-        
+        let np = new Project(tempProject._name, tempProject._description, tempProject._url, p);
+        console.log(p);
+        this._renderizeView(np);
     }
-
 
 
 }

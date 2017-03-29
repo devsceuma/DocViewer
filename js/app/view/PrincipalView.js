@@ -45,7 +45,7 @@ class PrincipalView extends View{
 		                  <div class="panel-group m-bot20" id="accordion2">
 			                  <!--METHODS -->
 							  ${exibirConstrutor?this._generateConstructors(c,i):''}
-							  ${exibirMetodo?this._generateMethods(c):''}
+							  ${exibirMetodo?this._generateMethods(c,i):''}
 	                      </div><!-- /panel-group-->		                  
 		              </section><!-- /SECTION - PANEL-->
 		              <!--Project Activity end-->
@@ -97,22 +97,22 @@ class PrincipalView extends View{
                 ).join('')}`
     }
 
-    _generateMethods(classe){
+    _generateMethods(classe,j){
         let exibirParametros = true;
 		let i = 0;
         return `${classe._methods.map(c=>
 					`<p style="display:none">${i++}</p>
-                    <div class="${this._getClassParameterByType(c._typeRequest)[0]}">
+                    <div class="${this._getClassParameterByType(c._typesRequest)[0]}">
 	                              <div class="panel-heading">
 	                                  <h4 class="panel-title">
-	                                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive${"-"+i}">
-	                                         <i class="${this._getClassParameterByType(c._typeRequest)[1]}"></i>
-		                              <span class="badge bg-inverse"> / ${c._typeRequest}</span>
+	                                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive${"-"+i}${j}">
+	                                         <i class="${this._getClassParameterByType(c._typesRequest)[1]}"></i>
+		                              <span class="badge bg-inverse"> / ${c._typesRequest}</span>
 		                              <span class=""> ${c._name}</span>
 	                                      </a>
 	                                  </h4>
 	                              </div> <!-- /panel-heading -->
-	                              <div id="collapseFive${"-"+i}" class="panel-collapse collapse">
+	                              <div id="collapseFive${"-"+i}${j}" class="panel-collapse collapse">
 	                                  <div class="panel-body">
 									  <div class="list-group">
 										  <a href="#" class="list-group-item">
