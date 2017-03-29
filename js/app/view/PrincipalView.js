@@ -21,13 +21,12 @@ class PrincipalView extends View{
     }
 
     _generateClasses(classes){
-        let exibirConstrutor = false;
+        let exibirConstrutor = true;
         let exibirMetodo = true;
+		let i = 0;
         return `${classes.map(c=>
-                    `
-                        
-                        
-                     					 
+			  `		 
+			  <p style="display:none">${i++}</p>
 		        <!--CLASSES-->
 				<div class="row">
 		          <div class="col-lg-12">
@@ -45,7 +44,7 @@ class PrincipalView extends View{
 						
 		                  <div class="panel-group m-bot20" id="accordion2">
 			                  <!--METHODS -->
-							  ${exibirConstrutor?this._generateConstructors(c):''}
+							  ${exibirConstrutor?this._generateConstructors(c,i):''}
 							  ${exibirMetodo?this._generateMethods(c):''}
 	                      </div><!-- /panel-group-->		                  
 		              </section><!-- /SECTION - PANEL-->
@@ -58,12 +57,43 @@ class PrincipalView extends View{
     }
 
 
-    _generateConstructors(classe){
+    _generateConstructors(classe,i){
+		let j = 0;
         return `${classe._constructors.map(c=>
-                    `<div class="constructor">
-                        <p> Construtor: ${c._description}</p>
-                        ${this._generateParameters(c)}
-                     </div>`
+                    `
+					<p style="display:none">${j++}</p>
+					<div class="panel-group m-bot20" id="accordion">
+                            <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                      <h4 class="panel-title">
+                                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseConstruct${"-"+i}${j}">
+                                             <i class="glyphicon glyphicon-tasks"></i>
+                                             <span class="badge bg-important"> Construct</span>
+											 ${c._description}
+                                          </a>
+                                      </h4>
+                                  </div>
+                                  <div id="collapseConstruct${"-"+i}${j}" class="panel-collapse collapse">
+                                      <div class="panel-body">
+                                          <h2>Parameters <span class="badge">12</span></h2>
+
+                                         <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                      <th>Parameter</th>
+                                                      <th>Description</th>
+                                                      <th>Parameter Type</th>  
+                                                      <th>Opcional</th>  
+                                                  </tr>
+                                            </thead>
+                                              <tbody>                                             
+                                              ${this._generateParameters(c)}                                              
+                                              </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                              </div>
+					`
                 ).join('')}`
     }
 
@@ -72,12 +102,13 @@ class PrincipalView extends View{
 		let i = 0;
         return `${classe._methods.map(c=>
 					`<p style="display:none">${i++}</p>
-                    <div class="${this._getClassParameterByType(c._typeRequest)}">
+                    <div class="${this._getClassParameterByType(c._typeRequest)[0]}">
 	                              <div class="panel-heading">
 	                                  <h4 class="panel-title">
 	                                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive${"-"+i}">
-	                                         <i class="glyphicon glyphicon-export"></i>
+	                                         <i class="${this._getClassParameterByType(c._typeRequest)[1]}"></i>
 		                              <span class="badge bg-inverse"> / ${c._typeRequest}</span>
+		                              <span class=""> ${c._name}</span>
 	                                      </a>
 	                                  </h4>
 	                              </div> <!-- /panel-heading -->
@@ -88,7 +119,9 @@ class PrincipalView extends View{
 										    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-link"></i> URL</h4>
 										    <p class="list-group-item-text text-primary">${c._url}</p><br>
 										    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-list-alt"></i> Description</h4>
-										    <p class="list-group-item-text text-success">${c._description}</p>
+										    <p class="list-group-item-text text-success">${c._description}</p><br>
+											<h4 class="list-group-item-heading"><i class="glyphicon glyphicon-link"></i> URL Example</h4>
+                                            <p class="list-group-item-text text-danger">${c._url}</p>
 										  </a>
 										</div><!-- /list-group-->
 	                                  <h2>Parameters <span class="badge">${(c._parameters.length)}</span></h2>
@@ -148,15 +181,22 @@ class PrincipalView extends View{
     }
 
     _getClassParameterByType(type){
+    	let style=[];
         if(type === "GET"){
-            return "panel panel-success";
+        	style.push("panel panel-danger");
+        	style.push("glyphicon glyphicon-import");
         }else if(type === "POST"){
-            return "panel panel-info";
+        	style.push("panel panel-info");
+        	style.push("glyphicon glyphicon-export");
         }else if(type === "PUT"){
-            return "panel panel-warning";
+        	style.push("panel panel-success");
+        	style.push("glyphicon glyphicon-repeat");
         }else if(type==="DELETE"){
-            return "panel panel-danger";
+        	style.push("panel panel-warning");
+        	style.push("glyphicon glyphicon-remove");
         }
+
+        return style;
     }
 	
 

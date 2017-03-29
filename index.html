@@ -36,8 +36,10 @@
                         		<option>Classe</option>
                         		<option>Método</option>
                         	</select>
-                            <input class="form-control" placeholder="Filtro" type="text">
-                            <input value="Buscar" type="submit" class="btn btn-primary" onclick="loaderController.loadJsonByProject(event,this)">
+                            <input class="form-control" placeholder="Filtro" type="text" id="filtro">
+                            <input value="Buscar" type="button" class="btn btn-primary" onclick="loaderController.loadJsonByProject(event)">
+
+                            <input value="Filtrar" type="button" class="btn btn-success" onclick="loaderController.filterProjects()">
                         </form>
                     </li>                    
                 </ul>
