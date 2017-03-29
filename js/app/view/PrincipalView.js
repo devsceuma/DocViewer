@@ -91,8 +91,7 @@ class PrincipalView extends View{
 										    <p class="list-group-item-text text-success">${c._description}</p>
 										  </a>
 										</div><!-- /list-group-->
-									  
-	                                  <h2>Parameters <span class="badge">12</span></h2>
+	                                  <h2>Parameters <span class="badge">${(c._parameters.length)}</span></h2>
 	                                     <table class="table table-hover">
 	                                     	<thead>
 		                                     	<tr>
