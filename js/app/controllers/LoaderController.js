@@ -38,7 +38,7 @@ class LoaderController {
         let filterSelect = this._select.value;
         let np;
 
-        debugger;
+        //debugger;
         if(filterValue == ""){
             np = this._project;
         }else{
@@ -55,7 +55,6 @@ class LoaderController {
     }
 
     _filterProjectsByClass(tempProject, filterValue){
-
         let p = tempProject._classes.filter(f=>{
             return (f["_name"].toLowerCase().indexOf(filterValue.toLowerCase()) > -1);
         });
@@ -63,11 +62,21 @@ class LoaderController {
     }
 
     _filterProjectsByMethod(tempProject, filterValue){
+        console.log(tempProject);
+        let classTemp = [];
 
-        let p = tempProject._classes._methods.filter(f=>{
-            return (f["_name"].toLowerCase().indexOf(filterValue.toLowerCase()) > -1);
+        tempProject._classes.forEach(c=>{
+            let m = c._methods.filter(m=>{
+                console.log((m["_name"].toLowerCase().indexOf(filterValue.toLowerCase()) > -1)+" - "+m._name)
+                 return (m["_name"].toLowerCase().indexOf(filterValue.toLowerCase()) > -1);
+            });
+            debugger;
+            let myClass = new Class().generateNewClass(c);
+            myClass.addFilteredMethods(m);
+            classTemp.push(myClass);
         });
-        return new Project(tempProject._name, tempProject._description, tempProject._url, p);
+        console.log(tempProject)
+        return new Project(tempProject._name, tempProject._description, tempProject._url, new Project().generateProject(tempProject,classTemp));
 
     }
 
