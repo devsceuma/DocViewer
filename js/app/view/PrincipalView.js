@@ -123,8 +123,6 @@ class PrincipalView extends View{
 										    <p class="list-group-item-text text-primary">${c._url}</p><br>
 										    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-list-alt"></i> Description</h4>
 										    <p class="list-group-item-text text-success">${c._description}</p><br>
-											<h4 class="list-group-item-heading"><i class="glyphicon glyphicon-link"></i> URL Example</h4>
-                                            <p class="list-group-item-text text-danger">${c._url}</p>
 										  </a>
 										</div><!-- /list-group-->
 	                                  <h2>Parameters <span class="badge">${(c._parameters.length)}</span></h2>
@@ -176,7 +174,7 @@ class PrincipalView extends View{
 						  <td>
 							  <label class="label label-default">${p._name}</label>
 						  </td>
-						  <td>${p._description}</td>
+						  <td>${typeof p._description != 'undefined'?p._description:'Parâmetro não documentado'}</td>
 						  <td>${p._type}</td>
 						  <td>${p._optional}</td> 
 					 </tr>`

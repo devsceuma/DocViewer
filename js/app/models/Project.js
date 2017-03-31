@@ -67,6 +67,7 @@ class Project {
         let parameters = [];
         let methods = [];
         clazz.methods.forEach(method => {
+            parameters = [];
                 method.parameters.forEach(p => {
                     parameters.push(new Parameter(p.name,p.description,p.type,p.optional))
                 });

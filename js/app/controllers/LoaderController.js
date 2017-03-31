@@ -23,7 +23,8 @@ class LoaderController {
     
     loadJsonByProject(event) {
         event.preventDefault();
-        let url = 'js/app/controllers/json.json';
+        //let url = 'js/app/controllers/json.json';
+        let url = 'http://localhost:8080/ServicosOnlineCaptacao/docs?token=25231f2bd30c3c3d490e1e9a03729f94&';
         this._service.getRequest((url),response =>{
             let promise = JSON.parse(response);
             let project = new Project(promise.name,promise.description,promise.url,promise.classes);
