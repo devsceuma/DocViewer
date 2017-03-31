@@ -23,6 +23,7 @@ class PrincipalView extends View{
     _generateClasses(classes){
         let exibirConstrutor = true;
         let exibirMetodo = true;
+		let exibitFields = true;
 		let i = 0;
         return `${classes.map(c=>
 			  `		 
@@ -56,6 +57,9 @@ class PrincipalView extends View{
                 ).join('')}`
     }
 
+	_generateFields(classe){
+		
+	}
 
     _generateConstructors(classe,i){
 		let j = 0;
@@ -120,8 +124,6 @@ class PrincipalView extends View{
 										    <p class="list-group-item-text text-primary">${c._url}</p><br>
 										    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-list-alt"></i> Description</h4>
 										    <p class="list-group-item-text text-success">${c._description}</p><br>
-											<h4 class="list-group-item-heading"><i class="glyphicon glyphicon-link"></i> URL Example</h4>
-                                            <p class="list-group-item-text text-danger">${c._url}</p>
 										  </a>
 										</div><!-- /list-group-->
 	                                  <h2>Parameters <span class="badge">${(c._parameters.length)}</span></h2>
