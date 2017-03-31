@@ -7,7 +7,9 @@ class PrincipalView extends View{
     }
 
     _template(model){
-        return  `<div class="row">
+        return  `
+        	<br><br><br><br>
+        	<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header"><i class="fa fa-laptop"></i>Projeto: ${model._name}</h3>
 						<ol class="breadcrumb">
@@ -17,9 +19,10 @@ class PrincipalView extends View{
 					</div>
 				</div>
                     ${this._generateClasses(model._classes)}
-                </div>`
+                </div>`;
     }
 
+    
     _generateClasses(classes){
         let exibirConstrutor = true;
         let exibirMetodo = true;

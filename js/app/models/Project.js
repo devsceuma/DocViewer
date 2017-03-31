@@ -12,6 +12,14 @@ class Project {
         
     }
 
+    generateProject(project, classes){
+        this._name = project._name;
+        this._description = project._description;
+        this._url = project._url;
+        this._createClasses(classes);
+        return this;
+    }
+
     get name() { return this._name };
     get description() { return this._description };
     get url() { return this._url };
@@ -58,8 +66,8 @@ class Project {
     _getMethods(clazz) {
         let parameters = [];
         let methods = [];
+        debugger;
         clazz.methods.forEach(method => {
-
             parameters = [];
             method.parameters.forEach(p => {
                 parameters.push(new Parameter(p.name,p.description,p.type,p.optional))

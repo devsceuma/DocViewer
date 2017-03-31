@@ -31,12 +31,12 @@
                 <ul class="nav top-menu">                    
                     <li>
                         <form class="navbar-form">
-                        	<select class="form-control">
+                        	<select class="form-control" id="selectClassMeth">
                         		<option>Projeto</option>
                         		<option>Classe</option>
                         		<option>Método</option>
                         	</select>
-                            <input class="form-control" placeholder="Filtro" type="text" id="filtro">
+                            <input class="form-control" placeholder="Filtro" type="text" id="filtro" required="true">
                             <input value="Buscar" type="button" class="btn btn-primary" onclick="loaderController.loadJsonByProject(event)">
 
                             <input value="Filtrar" type="button" class="btn btn-success" onclick="loaderController.filterProjects()">
@@ -91,6 +91,7 @@
       <div class="container" id="docViewerPrincipal">
 
    	  </div>
+      <div id="messages"></div>
       <div class="row">
                 
               <div class="text-right">
@@ -114,9 +115,11 @@
     <script type="text/javascript" src="js/app/models/Field.js"></script>
     <script type="text/javascript" src="js/app/models/Constructor.js"></script>
     <script type="text/javascript" src="js/app/models/Class.js"></script>
+    <script type="text/javascript" src="js/app/models/Message.js"></script>
     <script type="text/javascript" src="js/app/view/View.js"></script>
     <script type="text/javascript" src="js/app/controllers/LoaderController.js"></script>
     <script type="text/javascript" src="js/app/view/PrincipalView.js"></script>
+    <script type="text/javascript" src="js/app/view/MessageView.js"></script>
     
     <script>
         let loaderController = new LoaderController();
