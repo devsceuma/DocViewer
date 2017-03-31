@@ -30,6 +30,9 @@ class Class{
     get methods()       {return this._methods};
 
     addFilteredMethods(methods){
-        this._methods.push(methods);
+        methods.forEach(m=>{
+            this._methods.push(m);
+        });
+       
     }
 }

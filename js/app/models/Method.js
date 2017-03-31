@@ -10,14 +10,14 @@ class Method{
         this._url = url;
         this._modifier = modifier;
         this._parameters = parameters;
-        Object.freeze(this);
+        //Object.freeze(this);
     }
 
     get name()              {return this._name};
     get description()       {return this._description};
     get returnType()        {return this._returnType};
     get dateCreation()      {return this._dateCreation};
-    get typesRequest()       {return this._typesRequest};
+    get typesRequest()      {return this._typesRequest};
     get author()            {return this._author};
     get url()               {return this._url};
     get modifier()          {return this._modifier};
