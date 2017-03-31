@@ -66,12 +66,11 @@ class Project {
     _getMethods(clazz) {
         let parameters = [];
         let methods = [];
-        debugger;
         clazz.methods.forEach(method => {
             parameters = [];
-            method.parameters.forEach(p => {
-                parameters.push(new Parameter(p.name,p.description,p.type,p.optional))
-            });
+                method.parameters.forEach(p => {
+                    parameters.push(new Parameter(p.name,p.description,p.type,p.optional))
+                });
             methods.push(new Method(method.name,method.description,method.returnType,method.dateCreation,method.typesRequest,method.author,method.url,method.modifier,parameters));
         });
         return methods;

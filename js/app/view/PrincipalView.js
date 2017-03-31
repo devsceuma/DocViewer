@@ -178,7 +178,7 @@ class PrincipalView extends View{
 						  <td>
 							  <label class="label label-default">${p._name}</label>
 						  </td>
-						  <td>${p._description}</td>
+						  <td>${typeof p._description != 'undefined'?p._description:'Parâmetro não documentado'}</td>
 						  <td>${p._type}</td>
 						  <td>${p._optional}</td> 
 					 </tr>`
