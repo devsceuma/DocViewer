@@ -37,7 +37,7 @@ class Project {
                     clazz.origin, clazz.description,
                     this._getFields(clazz),
                     this._getConstructors(clazz),
-                    this._getMethods(clazz)));
+                    this._getMethods(clazz),clazz.url));
         })
     };
 
@@ -71,7 +71,7 @@ class Project {
                 method.parameters.forEach(p => {
                     parameters.push(new Parameter(p.name,p.description,p.type,p.optional))
                 });
-            methods.push(new Method(method.name,method.description,method.returnType,method.dateCreation,method.typesRequest,method.author,method.url,method.modifier,parameters));
+            methods.push(new Method(method.name,method.description,method.returnType,method.dateCreation,method.typesRequest,method.author,method.url,method.modifier,parameters,method.onSuccess));
         });
         return methods;
     }

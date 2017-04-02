@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>DocViewer</title>
@@ -10,29 +11,29 @@
 
 <body>
 
-   <!-- container section start -->
-  <section id="container" class="">     
-      
-      <header class="header dark-bg">
+    <!-- container section start -->
+    <section id="container" class="">
+
+        <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i>
-                <!--<img src="assets/img/Ceuma-logo.png" width="50" class="img-logo" />-->
+                    <!--<img src="assets/img/Ceuma-logo.png" width="50" class="img-logo" />-->
                 </div>
 
             </div>
 
-	        
+
             <!--logo start-->
             <a href="index.html" class="logo">Doc <span class="lite">Viewer</span></a>
             <!--logo end-->
 
             <div class="nav search-row" id="top_menu">
                 <!--  search form start -->
-                <ul class="nav top-menu">                    
+                <ul class="nav top-menu">
                     <li>
                         <form class="navbar-form">
-                        	<select class="form-control" id="selectClassMeth">
-                        		<option>Projeto</option>
+                            <select class="form-control" id="selectClassMeth">
+
                         		<option>Classe</option>
                         		<option>Método</option>
                         	</select>
@@ -41,12 +42,12 @@
 
                             <input value="Filtrar" type="button" class="btn btn-success" onclick="loaderController.filterProjects()">
                         </form>
-                    </li>                    
+                    </li>
                 </ul>
-                <!--  search form end -->                
+                <!--  search form end -->
             </div>
 
-            <div class="top-nav notification-row">                
+            <div class="top-nav notification-row">
                 <!-- notificatoin dropdown start-->
                 <ul class="nav pull-right top-menu">
                     <li class="dropdown">
@@ -86,22 +87,20 @@
                 </ul>
                 <!-- notificatoin dropdown end-->
             </div>
-      </header>      
-      <!--header end-->
-      <div class="container" id="docViewerPrincipal">
+        </header>
+        <!--header end-->
+        <div id="messages"></div>
+        <div class="container" id="docViewerPrincipal">
 
-   	  </div>
-      <div id="messages"></div>
-      <div class="row">
-                
-              <div class="text-right">
+        </div>
+            <div class="text-right" style="margin-right:4%">
                 <div class="credits">
                     <a href="#">DOCVIEWER</a> by <a href="#">NTI CEUMA </a>
                 </div>
             </div>
-            </div> <!-- /row-->
-          </section>
-      <!--main content end-->
+        <!-- /row-->
+    </section>
+    <!--main content end-->
     </section>
     </section>
 
@@ -120,9 +119,9 @@
     <script type="text/javascript" src="js/app/controllers/LoaderController.js"></script>
     <script type="text/javascript" src="js/app/view/PrincipalView.js"></script>
     <script type="text/javascript" src="js/app/view/MessageView.js"></script>
-    
+
     <script>
-        let loaderController = new LoaderController();
+                                                                                                  let loaderController = new LoaderController();
     </script>
 </body>
 

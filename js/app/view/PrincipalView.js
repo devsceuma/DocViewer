@@ -24,7 +24,7 @@ class PrincipalView extends View{
 
     
     _generateClasses(classes){
-        let exibirConstrutor = true;
+        let exibirConstrutor = false;
         let exibirMetodo = true;
 		let exibitFields = true;
 		let i = 0;
@@ -124,7 +124,7 @@ class PrincipalView extends View{
 									  <div class="list-group">
 										  <a href="#" class="list-group-item">
 										    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-link"></i> URL</h4>
-										    <p class="list-group-item-text text-primary">${c._url}</p><br>
+										    <p class="list-group-item-text text-primary">${classe._url}${c._url}</p><br>
 										    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-list-alt"></i> Description</h4>
 										    <p class="list-group-item-text text-success">${c._description}</p><br>
 										  </a>
@@ -146,24 +146,14 @@ class PrincipalView extends View{
 						                      		                      
 						                      </tbody>
 						                  </table>
+										  ${c._parameters.length === 0?`<div class="col-lg-12"><div class="alert alert-info"><h3 class="text text-info text-center">Este método não recebe nenhum parâmetro :)</h3></div></div>`:""}
 						                  <hr/>
 										  <!-- RESPONSES -->
 	                                  		<h2>Responses <span class="badge">12</span></h2>
-
 		                                  		<div class="bs-callout bs-callout-success col-md-12">
-												  <h4>Default Callout</h4>
-												  This is a default callout.
+												  <h4>Response 200</h4>
+												  <pre>${JSON.stringify(JSON.parse(c._onSuccess),null,2)}</pre>
 												</div>
-
-												<div class="bs-callout bs-callout-danger col-md-12">
-												  <h4>Default Callout</h4>
-												  {  
-								                     "name":"nome",
-								                     "description":"Nome do usuario teste para testar a funcao sobre quantidade maxima de caractere",
-								                     "type":"java.lang.String",
-								                     "optional":false
-								                  }
-												</div><!-- /.bs-callout-->
 										 <!-- /RESPONSES -->
 	                              </div><!-- /PANEL -BODY  -->
 								</div><!-- /collapseFive -->

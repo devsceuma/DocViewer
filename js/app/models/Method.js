@@ -1,6 +1,6 @@
 class Method{
 
-    constructor(name, description, returnType, dateCreation, typesRequest, author, url, modifier, parameters){
+    constructor(name, description, returnType, dateCreation, typesRequest, author, url, modifier, parameters, onSuccess){
         this._name = name;
         this._description = description;
         this._returnType = returnType;
@@ -10,6 +10,7 @@ class Method{
         this._url = url;
         this._modifier = modifier;
         this._parameters = parameters;
+        this._onSuccess = onSuccess;
         //Object.freeze(this);
     }
 
@@ -22,4 +23,5 @@ class Method{
     get url()               {return this._url};
     get modifier()          {return this._modifier};
     get parameters()        {return this._parameters};
+    get onSuccess()         {return this._onSuccess};
 }

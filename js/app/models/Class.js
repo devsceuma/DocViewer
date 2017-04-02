@@ -1,13 +1,14 @@
 class Class{
 
 
-    constructor(name, origin, description, fields, constructors, methods){
+    constructor(name, origin, description, fields, constructors,methods,url){
         this._name = name;
         this._origin = origin;
         this._description = description;
         this._fields = fields;
         this._constructors = constructors;
         this._methods = methods;
+        this._url = url;
         //Object.freeze(this);
     }
 
@@ -18,7 +19,7 @@ class Class{
         this._fields = classe._fields;
         this._constructors = classe._constructors;
         this._methods = [];
-
+        this._url = classe._url;
         return this;
     }
 
