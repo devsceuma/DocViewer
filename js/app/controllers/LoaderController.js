@@ -1,6 +1,5 @@
+
 class LoaderController {
-
-
 
     constructor() {
         let $ = document.querySelector.bind(document);

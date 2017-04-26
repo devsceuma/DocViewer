@@ -1,6 +1,4 @@
-class Class{
-
-
+export default class Class{
     constructor(name, origin, description, fields, constructors,methods,url){
         this._name = name;
         this._origin = origin;
