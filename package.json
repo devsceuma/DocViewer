@@ -1,6 +1,6 @@
 {
   "name": "DocViewer",
-  "version": "1.1",
+  "version": "v1.1",
   "description": "DocViewer é um projeto para ser utilizado junto com o DocEasier, este tem a responsabilidade de mostrar toda a documentação de uma API mepeada pelo seu irmão DocEasier.",
   "scripts": {
     "build": "tsc -p src/",
