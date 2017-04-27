@@ -17,23 +17,28 @@ var LoginComponent = (function () {
         this._router = _router;
         this.message = { message: '', severity: '' };
         this.credentials = { user: "", pwd: "" };
+        this.autenticate = true;
     }
     LoginComponent.prototype.ngOnInit = function () {
         this._loginService.signout();
     };
     LoginComponent.prototype.logar = function () {
         var _this = this;
-        if (this.credentials.user == "" || this.credentials.pwd == "") {
-            this.atualizarAlert('Digite os campos de usuário e senha', 'alert-danger');
+        if (this.autenticate) {
+            if (this.credentials.user == "" || this.credentials.pwd == "") {
+                this.atualizarAlert('Digite os campos de usuário e senha', 'alert-danger');
+            }
+            else {
+                this._loginService.signin(this.credentials.user, this.credentials.pwd).subscribe(function (data) {
+                    _this._router.navigate(['doc']);
+                    _this.atualizarAlert('', '');
+                }, function (error) {
+                    _this.atualizarAlert('Usuário ou senha incorreta', 'alert-danger');
+                });
+            }
         }
         else {
-            this._loginService.signin(this.credentials.user, this.credentials.pwd).subscribe(function (data) {
-                console.log(localStorage.getItem("currentUser"));
-                _this._router.navigate(['doc']);
-                _this.atualizarAlert('', '');
-            }, function (error) {
-                _this.atualizarAlert('Usuário ou senha incorreta', 'alert-danger');
-            });
+            this._router.navigate(['doc']);
         }
     };
     LoginComponent.prototype.atualizarAlert = function (mensagem, severity) {

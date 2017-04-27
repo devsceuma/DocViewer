@@ -14,10 +14,11 @@ export class DocComponent implements OnInit{
         private router: Router) { }
 
     ngOnInit(){
-        if(localStorage.getItem("currentUser") != null){
+        /*if(localStorage.getItem("currentUser") != null){
             this.user = new User(JSON.parse(localStorage.getItem("currentUser")));
         }else{
             this.router.navigate(['']);
-        }
+        }*/
+        this.user = new User(JSON.parse(localStorage.getItem("currentUser"));
     }
 }

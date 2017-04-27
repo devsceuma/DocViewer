@@ -16,12 +16,12 @@ var DocComponent = (function () {
         this.router = router;
     }
     DocComponent.prototype.ngOnInit = function () {
-        if (localStorage.getItem("currentUser") != null) {
-            this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
-        }
-        else {
+        /*if(localStorage.getItem("currentUser") != null){
+            this.user = new User(JSON.parse(localStorage.getItem("currentUser")));
+        }else{
             this.router.navigate(['']);
-        }
+        }*/
+        this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
     };
     return DocComponent;
 }());
