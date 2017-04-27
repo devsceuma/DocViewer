@@ -1,15 +1,16 @@
+<router-outlet></router-outlet>
 <div class="container">
 	<div class="login-container">
             <div id="output"></div>
-            <div class="avatar"></div>
+            <img src="./../../../assets/images/logo_doc_viewer.jpg" alt="Logo DocViewer"/>
             <div class="form-box">
-                <form (ngSubmit)="logar()" method="">
+                <form (ngSubmit)="logar()" method="POST">
                     <input name="user" [(ngModel)]="credentials.user" autocomplete="off" required="true" type="text" placeholder="Usuário">
                     <input name="pwd" type="password" autocomplete="off" [(ngModel)]="credentials.pwd" required="true" placeholder="Senha">
                     <button class="btn btn-info btn-block login" type="submit">Entrar</button>
                 </form>
             </div>
             <br>
-            <div class="alert {{return.class}}" role="alert" *ngIf="return.message.length>0 ">{{return.message}}</div>
+            <div class="alert {{message.severity}}" role="alert" *ngIf="message.message.length>0 ">{{message.message}}</div>
         </div>
 </div>

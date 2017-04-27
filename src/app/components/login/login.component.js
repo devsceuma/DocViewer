@@ -9,30 +9,47 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var LoginService_1 = require("./../../service/LoginService");
 var LoginComponent = (function () {
-    function LoginComponent() {
-        this.return = { message: "", class: "" };
+    function LoginComponent(_loginService, _router) {
+        this._loginService = _loginService;
+        this._router = _router;
+        this.message = { message: '', severity: '' };
         this.credentials = { user: "", pwd: "" };
     }
+    LoginComponent.prototype.ngOnInit = function () {
+        this._loginService.signout();
+    };
     LoginComponent.prototype.logar = function () {
+        var _this = this;
         if (this.credentials.user == "" || this.credentials.pwd == "") {
-            this.return.message = "Digite os campos de usu\u00E1rio e senha";
-            this.return.class = "alert-danger";
+            this.atualizarAlert('Digite os campos de usuário e senha', 'alert-danger');
         }
         else {
-            this.return.message = "";
-            this.return.class = "";
+            this._loginService.signin(this.credentials.user, this.credentials.pwd).subscribe(function (data) {
+                console.log(localStorage.getItem("currentUser"));
+                _this._router.navigate(['doc']);
+                _this.atualizarAlert('', '');
+            }, function (error) {
+                _this.atualizarAlert('Usuário ou senha incorreta', 'alert-danger');
+            });
         }
+    };
+    LoginComponent.prototype.atualizarAlert = function (mensagem, severity) {
+        this.message.message = mensagem;
+        this.message.severity = severity;
     };
     return LoginComponent;
 }());
 LoginComponent = __decorate([
     core_1.Component({
-        selector: 'page-login',
+        selector: 'login',
         templateUrl: "./login.html",
-        styleUrls: ['./login.css']
+        styleUrls: ['./login.css'],
+        providers: [LoginService_1.LoginService]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [LoginService_1.LoginService, router_1.Router])
 ], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

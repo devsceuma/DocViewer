@@ -130,6 +130,14 @@ html,body{
   }
 }
 
+.btn-info{
+    background-color: #0a4b71 !important;
+}
+
+.btn-info:hover{
+    background-color: #2d688a !important;
+}
+
 .fadeInUp {
   -webkit-animation-name: fadeInUp;
   animation-name: fadeInUp;
