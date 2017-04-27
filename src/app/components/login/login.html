@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="login-container">
+            <div id="output"></div>
+            <div class="avatar"></div>
+            <div class="form-box">
+                <form (ngSubmit)="logar()" method="">
+                    <input name="user" [(ngModel)]="credentials.user" type="text" placeholder="Usuário">
+                    <input name="pwd" [(ngModel)]="credentials.pwd" placeholder="Senha">
+                    <button class="btn btn-info btn-block login" type="submit">Entrar</button>
+                    <div class="alert alert-danger" role="alert" *ngIf="return.message.length>0 ">...</div>
+                   
+                </form>
+            </div>
+        </div>
+</div>
