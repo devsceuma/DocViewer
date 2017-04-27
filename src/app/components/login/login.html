@@ -4,12 +4,12 @@
             <div class="avatar"></div>
             <div class="form-box">
                 <form (ngSubmit)="logar()" method="">
-                    <input name="user" [(ngModel)]="credentials.user" type="text" placeholder="Usuário">
-                    <input name="pwd" [(ngModel)]="credentials.pwd" placeholder="Senha">
+                    <input name="user" [(ngModel)]="credentials.user" autocomplete="off" required="true" type="text" placeholder="Usuário">
+                    <input name="pwd" type="password" autocomplete="off" [(ngModel)]="credentials.pwd" required="true" placeholder="Senha">
                     <button class="btn btn-info btn-block login" type="submit">Entrar</button>
-                    <div class="alert alert-danger" role="alert" *ngIf="return.message.length>0 ">...</div>
-                   
                 </form>
             </div>
+            <br>
+            <div class="alert {{return.class}}" role="alert" *ngIf="return.message.length>0 ">{{return.message}}</div>
         </div>
 </div>

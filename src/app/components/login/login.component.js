@@ -11,14 +11,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var LoginComponent = (function () {
     function LoginComponent() {
-        this.return = { message: "" };
+        this.return = { message: "", class: "" };
         this.credentials = { user: "", pwd: "" };
     }
     LoginComponent.prototype.logar = function () {
-        console.log(this.credentials.user);
-        console.log(this.credentials.pwd);
-        console.log(this.return.message == "");
-        this.return.message = "Chegou com sucesso !";
+        if (this.credentials.user == "" || this.credentials.pwd == "") {
+            this.return.message = "Digite os campos de usu\u00E1rio e senha";
+            this.return.class = "alert-danger";
+        }
+        else {
+            this.return.message = "";
+            this.return.class = "";
+        }
     };
     return LoginComponent;
 }());

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
     styleUrls:['./login.css']
 })
 export class LoginComponent{
-    return={message:""}
+    return={message:"",class:""}
     credentials = {user:"",pwd:""}
 
     constructor(){
@@ -15,9 +15,13 @@ export class LoginComponent{
 
 
     logar(){
-        console.log(this.credentials.user);
-        console.log(this.credentials.pwd);
-        console.log(this.return.message == "")
-        this.return.message = "Chegou com sucesso !";
+        if(this.credentials.user == "" || this.credentials.pwd == ""){
+            this.return.message = `Digite os campos de usuário e senha`;
+            this.return.class="alert-danger";
+        }else{
+            this.return.message="";
+            this.return.class="";
+        }
     }
+
 }
