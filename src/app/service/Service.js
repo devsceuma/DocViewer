@@ -13,6 +13,7 @@ var Observable_1 = require("rxjs/Observable");
 var core_1 = require("@angular/core");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/map");
+require("rxjs/add/observable/throw");
 var Service = (function () {
     function Service(_http) {
         this._http = _http;
@@ -20,7 +21,7 @@ var Service = (function () {
     }
     Service.prototype.post = function (api, params) {
         console.log("URL REQUESTED:" + this._urlMaster + api);
-        return this._http.post(this._urlMaster + api, params, this._getHeaders('G')).catch(this._handleError);
+        return this._http.post(this._urlMaster + api, params, this._getHeaders('P')).catch(this._handleError);
     };
     Service.prototype.get = function (api, query) {
         return this._http.get(this._urlMaster + api + query).map(this._extractData).catch(this._handleError);
@@ -37,13 +38,12 @@ var Service = (function () {
         var errMsg;
         if (error instanceof http_1.Response) {
             var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
-            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+            var err = body.message || JSON.stringify(body);
+            errMsg = "" + err;
         }
         else {
             errMsg = error.message ? error.message : error.toString();
         }
-        console.error(errMsg);
         return Observable_1.Observable.throw(errMsg);
     };
     /**

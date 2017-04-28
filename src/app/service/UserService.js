@@ -16,16 +16,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var Service_1 = require("./Service");
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+require("rxjs/add/operator/catch");
 var UserService = (function (_super) {
     __extends(UserService, _super);
     function UserService(_http) {
         return _super.call(this, _http) || this;
     }
     UserService.prototype.addUser = function (user) {
-        return this.post('user-api/save', JSON.stringify(user)).subscribe(function (response) {
-            var user = response.json();
-            console.log(user);
-        });
+        debugger;
+        return this.post('user-api/save', user);
     };
     return UserService;
 }(Service_1.Service));

@@ -3,6 +3,7 @@ import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class Service{
@@ -15,7 +16,7 @@ export class Service{
 
     protected post(api:string,params:any):Observable<Response>{
         console.log("URL REQUESTED:"+this._urlMaster+api)
-        return this._http.post(this._urlMaster+api,params, this._getHeaders('G')).catch(this._handleError);
+        return this._http.post(this._urlMaster+api,params, this._getHeaders('P')).catch(this._handleError);
     }
 
     protected get(api:string,query:string):Observable<Response>{
@@ -36,12 +37,11 @@ export class Service{
         let errMsg: string;
         if (error instanceof Response) {
             const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+            const err = body.message || JSON.stringify(body);
+            errMsg = `${err}`;
         } else {
             errMsg = error.message ? error.message : error.toString();
         }
-        console.error(errMsg);
         return Observable.throw(errMsg);
      }
 

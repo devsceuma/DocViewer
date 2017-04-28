@@ -11,19 +11,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var UserService_1 = require("./../../service/UserService");
 var User_1 = require("./../../models/User");
+require("rxjs/add/operator/catch");
+require("rxjs/add/operator/catch");
 var RegisterUseComponent = (function () {
     function RegisterUseComponent(_userService) {
         this._userService = _userService;
+        this.message = { message: '', severity: '' };
     }
     RegisterUseComponent.prototype.ngOnInit = function () {
     };
     RegisterUseComponent.prototype.registerUser = function (form) {
+        var _this = this;
         if (form.confirmPassword != form.password) {
-            console.log("ERRADO !");
+            this.atualizarAlert("As senhas precisam coincidir", "alert-danger");
         }
         else {
-            this._userService.addUser(new User_1.User(form));
+            this._userService.addUser(new User_1.User(form)).subscribe(function (data) { console.log(data); }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () { _this.atualizarAlert("Usuário inserido com sucesso !", "alert-info"); });
         }
+    };
+    RegisterUseComponent.prototype.atualizarAlert = function (mensagem, severity) {
+        this.message.message = mensagem;
+        this.message.severity = severity;
     };
     return RegisterUseComponent;
 }());
