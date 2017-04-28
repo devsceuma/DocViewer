@@ -5,6 +5,8 @@ export class User{
     username:string;
     email:string;
     password:string;
+    organization:string;
+    job:string;
 
     constructor(obj:any){
         this.id = obj.id;
@@ -12,5 +14,7 @@ export class User{
         this.username = obj.username;
         this.email = obj.email;
         this.password = obj.password;
+        this.organization = obj.organization;
+        this.job = obj.job;
     }
 }

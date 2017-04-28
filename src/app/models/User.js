@@ -6,6 +6,8 @@ var User = (function () {
         this.username = obj.username;
         this.email = obj.email;
         this.password = obj.password;
+        this.organization = obj.organization;
+        this.job = obj.job;
     }
     return User;
 }());

@@ -12,6 +12,8 @@ var http_1 = require("@angular/http");
 var login_component_1 = require("./components/login/login.component");
 var doc_component_1 = require("./components/doc/doc.component");
 var app_component_1 = require("./app.component");
+var admin_component_1 = require("./components/admin/admin.component");
+var admin_register_user_component_1 = require("./components/admin/admin.register.user.component");
 var routes_general_1 = require("./routes.general");
 var AppModule = (function () {
     function AppModule() {
@@ -27,7 +29,7 @@ AppModule = __decorate([
             http_1.JsonpModule,
             routes_general_1.routing
         ],
-        declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, doc_component_1.DocComponent],
+        declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, doc_component_1.DocComponent, admin_component_1.AdminComponent, admin_register_user_component_1.RegisterUseComponent],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

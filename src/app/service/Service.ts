@@ -7,14 +7,15 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Service{
 
-    private _urlMaster:string = "http://localhost:8080/user-api/login";
+    private _urlMaster:string = "http://localhost:8080/";
 
     constructor(private _http:Http){
 
     }
 
-    protected post(api:string,params:URLSearchParams):Observable<Response>{
-        return this._http.post(this._urlMaster,params, this._getHeaders('P')).catch(this._handleError);
+    protected post(api:string,params:any):Observable<Response>{
+        console.log("URL REQUESTED:"+this._urlMaster+api)
+        return this._http.post(this._urlMaster+api,params, this._getHeaders('G')).catch(this._handleError);
     }
 
     protected get(api:string,query:string):Observable<Response>{
@@ -50,7 +51,7 @@ export class Service{
      */
     private _getHeaders(type:string): Headers{
         if(type ===  'G'){
-            let headers = new Headers({ 'Content-Type': 'application/json' });
+            let headers = new Headers({ 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*'});
             return headers;
         }else{
             let headers = new Headers({'Content-Type':'application/x-www-form-urlencoded'});

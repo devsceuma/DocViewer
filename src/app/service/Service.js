@@ -16,10 +16,11 @@ require("rxjs/add/operator/map");
 var Service = (function () {
     function Service(_http) {
         this._http = _http;
-        this._urlMaster = "http://localhost:8080/user-api/login";
+        this._urlMaster = "http://localhost:8080/";
     }
     Service.prototype.post = function (api, params) {
-        return this._http.post(this._urlMaster, params, this._getHeaders('P')).catch(this._handleError);
+        console.log("URL REQUESTED:" + this._urlMaster + api);
+        return this._http.post(this._urlMaster + api, params, this._getHeaders('G')).catch(this._handleError);
     };
     Service.prototype.get = function (api, query) {
         return this._http.get(this._urlMaster + api + query).map(this._extractData).catch(this._handleError);
@@ -51,7 +52,7 @@ var Service = (function () {
      */
     Service.prototype._getHeaders = function (type) {
         if (type === 'G') {
-            var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+            var headers = new http_1.Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
             return headers;
         }
         else {

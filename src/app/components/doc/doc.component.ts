@@ -19,6 +19,6 @@ export class DocComponent implements OnInit{
         }else{
             this.router.navigate(['']);
         }*/
-        this.user = new User(JSON.parse(localStorage.getItem("currentUser"));
+        this.user = new User(JSON.parse(localStorage.getItem("currentUser")));
     }
 }
