@@ -4,6 +4,7 @@ import {URLSearchParams, Http,Response} from '@angular/http';
 import {User} from './../models/User';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class UserService extends Service{
@@ -12,17 +13,20 @@ export class UserService extends Service{
         super(_http);
     }
 
-    addUser(user:User):Observable<Response>{
+    addUser(user:User):Observable<User>{
         return this.post('user-api/save',user);
     }
 
-    loadUsers():User[]{
+    loadUsers(){
 
-        let users:User[];
-        this.get('user-api/findAllUsers','').subscribe(data=>{
-            console.log(data);
-        })
-        return null;
+        let users:User[] = [];
+        this.get('user-api/findAllUsers','').subscribe(response=>{
+            response.map((user:User)=>{
+                users.push(new User(user));
+            })
+        });
+        return users;
+
     }
 
 

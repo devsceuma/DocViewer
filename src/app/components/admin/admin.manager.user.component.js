@@ -14,30 +14,38 @@ var UserService_1 = require("./../../service/UserService");
 var ManagerUserComponent = (function () {
     function ManagerUserComponent(_userService) {
         this._userService = _userService;
-        this.rows = [
-            { name: 'Austin', gender: 'Male', company: 'Swimlane' },
-            { name: 'Dany', gender: 'Male', company: 'KFC' },
-            { name: 'Molly', gender: 'Female', company: 'Burger King' },
-        ];
+        this.rows = [];
+        this.selected = [{ name: '' }];
         this.columns = [
-            { prop: 'name' },
-            { name: 'Gender' },
-            { name: 'Company' }
+            { prop: 'name', name: 'Nome' },
+            { prop: 'username', name: 'Usuário' },
+            { prop: 'email', name: 'E-mail' },
+            { prop: 'organization', name: 'Empresa' },
+            { prop: 'job', name: 'Cargo' }
         ];
     }
     ManagerUserComponent.prototype.ngOnInit = function () {
         console.log("Startou !!!");
-        this._userService.loadUsers();
+        var users = this._userService.loadUsers();
+        this.rows = users;
     };
     ManagerUserComponent.prototype.getAllUsers = function () {
         this._userService.loadUsers();
+    };
+    ManagerUserComponent.prototype.onSelect = function (selected) {
+        this.selected.name = selected.selected[0].name;
+    };
+    ManagerUserComponent.prototype.onActivate = function (event) {
+        console.log('Activate Event', event);
     };
     return ManagerUserComponent;
 }());
 ManagerUserComponent = __decorate([
     core_1.Component({
         selector: 'manager-user-form',
-        template: "   \n    <div>\n      <ngx-datatable\n        [rows]=\"rows\"\n        [columns]=\"columns\">\n      </ngx-datatable>\n    </div>"
+        templateUrl: './manager-user.html',
+        styleUrls: ['./../../../assets/css/app.css'],
+        providers: [UserService_1.UserService]
     }),
     __metadata("design:paramtypes", [UserService_1.UserService])
 ], ManagerUserComponent);

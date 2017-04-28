@@ -14,11 +14,11 @@ export class Service{
 
     }
 
-    protected post(api:string,params:any):Observable<Response>{
+    protected post(api:string,params:any):Observable<any>{
         return this._http.post(this._urlMaster+api,params, this._getHeaders('P')).catch(this._handleError);
     }
 
-    protected get(api:string,query:string):Observable<Response>{
+    protected get(api:string,query:string):Observable<any>{
         return this._http.get(this._urlMaster+api+query).map(this._extractData).catch(this._handleError);
     }
 

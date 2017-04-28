@@ -22,7 +22,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Service_1 = require("./Service");
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var User_1 = require("./../models/User");
 require("rxjs/add/operator/catch");
+require("rxjs/add/operator/map");
 var UserService = (function (_super) {
     __extends(UserService, _super);
     function UserService(_http) {
@@ -32,11 +34,13 @@ var UserService = (function (_super) {
         return this.post('user-api/save', user);
     };
     UserService.prototype.loadUsers = function () {
-        var users;
-        this.get('user-api/findAllUsers', '').subscribe(function (data) {
-            console.log(data);
+        var users = [];
+        this.get('user-api/findAllUsers', '').subscribe(function (response) {
+            response.map(function (user) {
+                users.push(new User_1.User(user));
+            });
         });
-        return null;
+        return users;
     };
     return UserService;
 }(Service_1.Service));
