@@ -7,9 +7,10 @@ import {Component,OnInit,Injectable} from '@angular/core';
 })
 export class AdminComponent{
 
-
     constructor(){
 
     }
+
+    capturarclique(){}
 
 }

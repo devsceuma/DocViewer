@@ -8,21 +8,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var UserService_1 = require("./../../service/UserService");
 var ManagerUserComponent = (function () {
-    function ManagerUserComponent() {
+    function ManagerUserComponent(_userService) {
+        this._userService = _userService;
+        this.rows = [
+            { name: 'Austin', gender: 'Male', company: 'Swimlane' },
+            { name: 'Dany', gender: 'Male', company: 'KFC' },
+            { name: 'Molly', gender: 'Female', company: 'Burger King' },
+        ];
+        this.columns = [
+            { prop: 'name' },
+            { name: 'Gender' },
+            { name: 'Company' }
+        ];
     }
     ManagerUserComponent.prototype.ngOnInit = function () {
         console.log("Startou !!!");
+        this._userService.loadUsers();
+    };
+    ManagerUserComponent.prototype.getAllUsers = function () {
+        this._userService.loadUsers();
     };
     return ManagerUserComponent;
 }());
 ManagerUserComponent = __decorate([
     core_1.Component({
         selector: 'manager-user-form',
-        templateUrl: './manager-user.html'
+        template: "   \n    <div>\n      <ngx-datatable\n        [rows]=\"rows\"\n        [columns]=\"columns\">\n      </ngx-datatable>\n    </div>"
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [UserService_1.UserService])
 ], ManagerUserComponent);
 exports.ManagerUserComponent = ManagerUserComponent;
 //# sourceMappingURL=admin.manager.user.component.js.map

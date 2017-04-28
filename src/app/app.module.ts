@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { HttpModule, JsonpModule} from '@angular/http';
 import { LoginComponent } from './components/login/login.component';
 import { DocComponent } from './components/doc/doc.component';
@@ -12,7 +13,8 @@ import { RouterModule, Routes} from '@angular/router';
 import {routing} from './routes.general';
 
 @NgModule({
-  imports:[ 
+  imports:[
+  NgxDatatableModule, 
   BrowserModule,
   FormsModule, 
   HttpModule, 

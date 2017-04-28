@@ -16,5 +16,14 @@ export class UserService extends Service{
         return this.post('user-api/save',user);
     }
 
+    loadUsers():User[]{
+
+        let users:User[];
+        this.get('user-api/findAllUsers','').subscribe(data=>{
+            console.log(data);
+        })
+        return null;
+    }
+
 
 }

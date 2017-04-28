@@ -5,6 +5,7 @@ import {DocComponent} from './components/doc/doc.component';
 import {AdminComponent} from './components/admin/admin.component';
 import {ManagerUserComponent} from './components/admin/admin.manager.user.component';
 import {RegisterUserComponent} from './components/admin/admin.register.user.component';
+
 const APP_ROUTES:Routes=[
     { path:'doc', component:DocComponent},
     { path:'admin',component:AdminComponent,children:[
