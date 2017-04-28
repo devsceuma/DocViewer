@@ -23,7 +23,6 @@ var UserService = (function (_super) {
         return _super.call(this, _http) || this;
     }
     UserService.prototype.addUser = function (user) {
-        debugger;
         return this.post('user-api/save', user);
     };
     return UserService;

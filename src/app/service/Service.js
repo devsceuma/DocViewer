@@ -20,7 +20,6 @@ var Service = (function () {
         this._urlMaster = "http://localhost:8080/";
     }
     Service.prototype.post = function (api, params) {
-        console.log("URL REQUESTED:" + this._urlMaster + api);
         return this._http.post(this._urlMaster + api, params, this._getHeaders('P')).catch(this._handleError);
     };
     Service.prototype.get = function (api, query) {

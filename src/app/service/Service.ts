@@ -15,7 +15,6 @@ export class Service{
     }
 
     protected post(api:string,params:any):Observable<Response>{
-        console.log("URL REQUESTED:"+this._urlMaster+api)
         return this._http.post(this._urlMaster+api,params, this._getHeaders('P')).catch(this._handleError);
     }
 

@@ -11,7 +11,7 @@ import 'rxjs/add/operator/catch';
     styleUrls:['./../../../assets/css/light-bootstrap-dashboard.css','./../../../assets/css/demo.css'],
     providers:[UserService]
 })
-export class RegisterUseComponent implements OnInit{
+export class RegisterUserComponent implements OnInit{
     message = {message:'',severity:''}
     constructor(private _userService:UserService){}
 

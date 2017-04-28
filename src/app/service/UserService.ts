@@ -13,7 +13,6 @@ export class UserService extends Service{
     }
 
     addUser(user:User):Observable<Response>{
-        debugger;
         return this.post('user-api/save',user);
     }
 

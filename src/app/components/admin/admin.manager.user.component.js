@@ -9,18 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var AdminComponent = (function () {
-    function AdminComponent() {
+var ManagerUserComponent = (function () {
+    function ManagerUserComponent() {
     }
-    return AdminComponent;
+    ManagerUserComponent.prototype.ngOnInit = function () {
+        console.log("Startou !!!");
+    };
+    return ManagerUserComponent;
 }());
-AdminComponent = __decorate([
+ManagerUserComponent = __decorate([
     core_1.Component({
-        selector: 'admin-panel',
-        templateUrl: './admin.html',
-        styleUrls: ['./../../../assets/css/light-bootstrap-dashboard.css', './../../../assets/css/demo.css'],
+        selector: 'manager-user-form',
+        templateUrl: './manager-user.html'
     }),
     __metadata("design:paramtypes", [])
-], AdminComponent);
-exports.AdminComponent = AdminComponent;
-//# sourceMappingURL=admin.component.js.map
+], ManagerUserComponent);
+exports.ManagerUserComponent = ManagerUserComponent;
+//# sourceMappingURL=admin.manager.user.component.js.map

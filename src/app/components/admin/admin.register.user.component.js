@@ -13,14 +13,14 @@ var UserService_1 = require("./../../service/UserService");
 var User_1 = require("./../../models/User");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/catch");
-var RegisterUseComponent = (function () {
-    function RegisterUseComponent(_userService) {
+var RegisterUserComponent = (function () {
+    function RegisterUserComponent(_userService) {
         this._userService = _userService;
         this.message = { message: '', severity: '' };
     }
-    RegisterUseComponent.prototype.ngOnInit = function () {
+    RegisterUserComponent.prototype.ngOnInit = function () {
     };
-    RegisterUseComponent.prototype.registerUser = function (form) {
+    RegisterUserComponent.prototype.registerUser = function (form) {
         var _this = this;
         if (form.confirmPassword != form.password) {
             this.atualizarAlert("As senhas precisam coincidir", "alert-danger");
@@ -29,13 +29,13 @@ var RegisterUseComponent = (function () {
             this._userService.addUser(new User_1.User(form)).subscribe(function (data) { console.log(data); }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () { _this.atualizarAlert("Usuário inserido com sucesso !", "alert-info"); });
         }
     };
-    RegisterUseComponent.prototype.atualizarAlert = function (mensagem, severity) {
+    RegisterUserComponent.prototype.atualizarAlert = function (mensagem, severity) {
         this.message.message = mensagem;
         this.message.severity = severity;
     };
-    return RegisterUseComponent;
+    return RegisterUserComponent;
 }());
-RegisterUseComponent = __decorate([
+RegisterUserComponent = __decorate([
     core_1.Component({
         selector: 'register-use-admin-form',
         templateUrl: './register-use.html',
@@ -43,6 +43,6 @@ RegisterUseComponent = __decorate([
         providers: [UserService_1.UserService]
     }),
     __metadata("design:paramtypes", [UserService_1.UserService])
-], RegisterUseComponent);
-exports.RegisterUseComponent = RegisterUseComponent;
+], RegisterUserComponent);
+exports.RegisterUserComponent = RegisterUserComponent;
 //# sourceMappingURL=admin.register.user.component.js.map

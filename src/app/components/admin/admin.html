@@ -1,6 +1,5 @@
 <!-- WRAPPER -->
 <div class="wrapper">
-
     <!-- SIDE IMAGE -->
     <div class="sidebar" data-color="dark-blue" data-image="assets/img/sidebar-5.jpg">
 
@@ -13,19 +12,19 @@
 
                 <ul class="nav">
                     <li>
-                        <a href="dashboard.html">
+                        <a routerLink="/admin/add-user">
                             <i class="pe-7s-graph"></i>
                             <p>Adicionar Usuario</p>
                         </a>
                     </li>
                     <li>
-                        <a href="user.html">
+                        <a routerLink="/admin/manager-user">
                             <i class="pe-7s-user"></i>
                             <p>Gerenciar Usuarios</p>
                         </a>
                     </li>
-                    <li class="active">
-                        <a href="table.html">
+                    <li>
+                        <a routerLink="/admin">
                             <i class="pe-7s-note2"></i>
                             <p>Projetos</p>
                         </a>
@@ -59,4 +58,6 @@
                 </div>
             </div>
         </nav>
+    <router-outlet></router-outlet>
     </div>
+</div>

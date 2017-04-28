@@ -59,3 +59,11 @@
 .table-upgrade td:nth-child(3){
     text-align: center;
 }
+
+
+.body{
+    position: absolute;
+    margin-left:20%;
+    width: 78%;
+    margin-top:10%;
+}

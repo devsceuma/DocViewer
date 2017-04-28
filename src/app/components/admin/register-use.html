@@ -1,72 +1,7 @@
-<!-- WRAPPER -->
-<div class="wrapper">
-
-    <!-- SIDE IMAGE -->
-    <div class="sidebar" data-color="dark-blue" data-image="assets/img/sidebar-5.jpg">
-
-        <div class="sidebar-wrapper">
-                <div class="logo">
-                    <a href="#" class="simple-text">
-                        DOC VIEWER
-                    </a>
-                </div>
-
-                <ul class="nav">
-                    <li>
-                        <a href="dashboard.html">
-                            <i class="pe-7s-graph"></i>
-                            <p>Adicionar Usuario</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="user.html">
-                            <i class="pe-7s-user"></i>
-                            <p>Gerenciar Usuarios</p>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="table.html">
-                            <i class="pe-7s-note2"></i>
-                            <p>Projetos</p>
-                        </a>
-                    </li>
-                </ul>
-        </div>
-    </div>
-
-    <!-- END SIDE MENU -->
-
-    <div class="main-panel">
-		<nav class="navbar navbar-default navbar-fixed">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#">
-                                <p>Log out</p>
-                            </a>
-                        </li>
-						<li class="separator hidden-lg hidden-md"></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <br/><br/>
         <div class="container">
                 <h2>Inserir novo usuário</h2>
                 <hr/>
-
                 <!-- START ADD USER FORM -->
-
                 <form #form="ngForm" (ngSubmit)="registerUser(form.value)"  method="POST">
                 <div class="row">
                     <div class="col-md-3">
@@ -120,4 +55,3 @@
                 <div class="clearfix"></div>
             </form>
     </div>
-</div>
