@@ -22,37 +22,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Service_1 = require("./Service");
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
-var User_1 = require("./../models/User");
-require("rxjs/add/operator/catch");
-require("rxjs/add/operator/map");
-var UserService = (function (_super) {
-    __extends(UserService, _super);
-    function UserService(_http) {
+var Project_1 = require("./../models/Project");
+var ProjectService = (function (_super) {
+    __extends(ProjectService, _super);
+    function ProjectService(_http) {
         return _super.call(this, _http) || this;
     }
-    UserService.prototype.addUser = function (user) {
-        return this.post('user-api/save', user);
+    ProjectService.prototype.saveProject = function (project) {
+        return this.post('project-api/save', project);
     };
-    UserService.prototype.deleteUser = function (user) {
-        return this.post('user-api/remove', user);
-    };
-    UserService.prototype.updateUser = function (user) {
-        return this.post('user-api/update', user);
-    };
-    UserService.prototype.loadUsers = function () {
-        var users = [];
-        this.get('user-api/findAllUsers', '').subscribe(function (response) {
-            response.map(function (user) {
-                users.push(new User_1.User(user));
+    ProjectService.prototype.loadProjects = function () {
+        var projects = [];
+        this.get('project-api/findAllProjects', '').subscribe(function (response) {
+            response.map(function (project) {
+                projects.push(new Project_1.Project(project));
             });
         });
-        return users;
+        return projects;
     };
-    return UserService;
+    return ProjectService;
 }(Service_1.Service));
-UserService = __decorate([
+ProjectService = __decorate([
     core_1.Injectable(),
     __metadata("design:paramtypes", [http_1.Http])
-], UserService);
-exports.UserService = UserService;
-//# sourceMappingURL=UserService.js.map
+], ProjectService);
+exports.ProjectService = ProjectService;
+//# sourceMappingURL=ProjectService.js.map

@@ -10,24 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var UserService_1 = require("./../../service/UserService");
-var User_1 = require("./../../models/User");
+var UserService_1 = require("./../../../service/UserService");
+var User_1 = require("./../../../models/User");
 var ManagerUserComponent = (function () {
     function ManagerUserComponent(_userService) {
         this._userService = _userService;
         this.rows = [];
         this.message = { message: '', severity: '' };
         this.sortOrder = "asc";
+        this.showDetail = false;
     }
     ManagerUserComponent.prototype.ngOnInit = function () {
         this.rows = this._userService.loadUsers();
     };
     ManagerUserComponent.prototype.getUserDetail = function (user) {
+        this.showDetail = true;
         this.userSelected = user;
     };
     ManagerUserComponent.prototype.removeUser = function (user) {
         var _this = this;
-        this._userService.deleteUser(user).subscribe(function (data) { console.log(data); }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
+        this.atualizarAlert('Deletando usuário...', "alert-info");
+        this._userService.deleteUser(user).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
             _this.atualizarAlert('Usuário ' + user.name + ' deletado com sucesso !', "alert-info");
             _this.rows.splice(_this.rows.indexOf(user), 1);
         });
@@ -35,7 +38,9 @@ var ManagerUserComponent = (function () {
     ManagerUserComponent.prototype.updateUser = function (form) {
         var _this = this;
         form.username = this.userSelected.username;
-        this._userService.updateUser(new User_1.User(form)).subscribe(function (data) { console.log(data); }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
+        form.id = this.userSelected.id;
+        this.atualizarAlert('Atualizando usuário...', "alert-info");
+        this._userService.updateUser(new User_1.User(form)).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
             _this.atualizarAlert('Usuário ' + form.name + ' atualizado com sucesso !', "alert-info");
             _this.rows = _this._userService.loadUsers();
         });
@@ -50,7 +55,7 @@ ManagerUserComponent = __decorate([
     core_1.Component({
         selector: 'manager-user-form',
         templateUrl: './manager-user.html',
-        styleUrls: ['./../../../assets/css/app.css'],
+        styleUrls: ['./../../../../assets/css/light-bootstrap-dashboard.css', './../../../../assets/css/demo.css'],
         providers: [UserService_1.UserService]
     }),
     __metadata("design:paramtypes", [UserService_1.UserService])

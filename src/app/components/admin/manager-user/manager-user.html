@@ -1,0 +1,101 @@
+<div class="container">
+  <h2>Gerenciar Usuários</h2>
+  <hr/>
+  <div class="alert {{message.severity}}" role="alert" *ngIf="message.message.length>0 ">{{message.message}}</div>
+  <div class="panel panel-default">
+    <table class="table table-striped" [mfData]="rows" #mf="mfDataTable" [mfRowsOnPage]="5" [(mfSortOrder)]="sortOrder">
+      <thead>
+        <tr>
+          <th style="width: 20%">
+            <mfDefaultSorter by="name">Nome</mfDefaultSorter>
+          </th>
+          <th style="width: 20%">
+            <mfDefaultSorter by="email">Email</mfDefaultSorter>
+          </th>
+          <th style="width: 8%">
+            <mfDefaultSorter by="age">Usuario</mfDefaultSorter>
+          </th>
+          <th style="width: 20%">
+            <mfDefaultSorter by="city">Empresa</mfDefaultSorter>
+          </th>
+          <th style="width: 20%">
+            <mfDefaultSorter by="city">Cargo</mfDefaultSorter>
+          </th>
+          <th style="width: 3%"></th>
+          <th style="width: 3%"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of mf.data">
+            <td>{{item.name}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.username}}</td>
+            <td>{{item.organization | uppercase}}</td>
+            <td>{{item.job}}</td>
+            <td>
+              <button (click)="getUserDetail(item)" class="btn btn-info btn-fill"><span class="glyphicon glyphicon-cog"></span></button>
+            </td>
+            <td>
+              <button (click)="removeUser(item)" class="btn btn-danger btn-fill" data-toggle="modal"  data-target="#myModal"><span class="glyphicon glyphicon-remove"></span></button>
+            </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div class="panel panel-default" *ngIf="showDetail">
+    <div class="panel-heading">Detalhes de {{userSelected.name}}</div>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#">Informações Pessoais</a></li>
+      <li><a href="#">Projetos</a></li>
+    </ul>
+    <br><br>
+      <div style="padding:0px 10px 0px 10px">
+        <form #form="ngForm" (ngSubmit)="updateUser(form.value)"  method="POST">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail">Nome Completo</label>
+                            <input type="email" name="name" value="{{userSelected.name}}" autocomplete="off" class="form-control" ngModel required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail">Email</label>
+                            <input type="email" value="{{userSelected.email}}" class="form-control" name="email" ngModel required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Empresa</label>
+                            <input type="email" class="form-control" value="{{userSelected.organization}}" name="organization" placeholder="Universidade Ceuma" ngModel>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Cargo</label>
+                            <input type="email" class="form-control" value="{{userSelected.job}}" name="job" ngModel>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" name="password" autocomplete="off" value="{{userSelected.password}}" class="form-control" ngModel>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-info btn-fill pull-right" id="load">Atualizar Usuário</button>
+                <div class="clearfix"></div>
+            </form>
+            <br/><br/>
+          </div>
+    </div>
+</div>

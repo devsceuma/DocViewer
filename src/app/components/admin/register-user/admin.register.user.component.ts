@@ -1,14 +1,14 @@
 import {Component,OnInit} from '@angular/core';
-import {UserService} from './../../service/UserService';
+import {UserService} from './../../../service/UserService';
 import {Observable} from 'rxjs/Observable';
-import {User} from './../../models/User';
+import {User} from './../../../models/User';
 import 'rxjs/add/operator/catch';
 
 import 'rxjs/add/operator/catch';
 @Component({
     selector:'register-use-admin-form',
     templateUrl:'./register-use.html',
-    styleUrls:['./../../../assets/css/light-bootstrap-dashboard.css','./../../../assets/css/demo.css'],
+    styleUrls:['./../../../../assets/css/light-bootstrap-dashboard.css','./../../../../assets/css/demo.css'],
     providers:[UserService]
 })
 export class RegisterUserComponent implements OnInit{

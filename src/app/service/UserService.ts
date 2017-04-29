@@ -17,8 +17,15 @@ export class UserService extends Service{
         return this.post('user-api/save',user);
     }
 
-    loadUsers(){
+    deleteUser(user:User):Observable<User>{
+        return this.post('user-api/remove',user);
+    }
 
+    updateUser(user:User):Observable<User>{
+        return this.post('user-api/update',user);
+    }
+
+    loadUsers():User[]{
         let users:User[] = [];
         this.get('user-api/findAllUsers','').subscribe(response=>{
             response.map((user:User)=>{
