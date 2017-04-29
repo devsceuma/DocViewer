@@ -38,6 +38,18 @@ export class ProjectComponent implements OnInit{
         }
     }
 
+    removeProject(project: Project) {
+        this.atualizarAlert('Deletando projeto...', "alert-info")
+        this._projectService.deleteProject(project).subscribe(
+            data => { },
+            error => { this.atualizarAlert(error, "alert-danger") },
+            () => {
+                this.atualizarAlert('Projeto ' + project.name + ' deletado com sucesso !', "alert-info")
+                this.projects.splice(this.projects.indexOf(project), 1);
+            }
+        )
+    }
+
     atualizarAlert(mensagem:string, severity:string){
          this.message.message = mensagem;
          this.message.severity=severity;

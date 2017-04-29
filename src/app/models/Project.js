@@ -4,6 +4,7 @@ var Project = (function () {
     function Project(obj) {
         this.name = obj.name;
         this.url = obj.url;
+        this.id = obj.id;
     }
     return Project;
 }());

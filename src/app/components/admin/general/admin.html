@@ -6,7 +6,7 @@
         <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="#" class="simple-text">
-                        DOC VIEWER {{nome}}
+                        DOC VIEWER
                     </a>
                 </div>
 
@@ -46,8 +46,13 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#">
-                                <p>Log out</p>
+                            <a>
+                                <p>Olá, {{user.name}}</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" (click)="logout()">
+                                <p>Sair</p>
                             </a>
                         </li>
 						<li class="separator hidden-lg hidden-md"></li>

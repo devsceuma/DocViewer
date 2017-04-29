@@ -14,11 +14,14 @@ var http_1 = require("@angular/http");
 var login_component_1 = require("./components/login/login.component");
 var doc_component_1 = require("./components/doc/doc.component");
 var app_component_1 = require("./app.component");
+var tab_1 = require("./components/admin/manager-user/tab");
+var tabs_1 = require("./components/admin/manager-user/tabs");
 var admin_component_1 = require("./components/admin/general/admin.component");
 var admin_project_component_1 = require("./components/admin/project/admin.project.component");
 var admin_register_user_component_1 = require("./components/admin/register-user/admin.register.user.component");
 var admin_manager_user_component_1 = require("./components/admin/manager-user/admin.manager.user.component");
 var routes_general_1 = require("./routes.general");
+var routes_general_2 = require("./routes.general");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -32,9 +35,20 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule,
             http_1.JsonpModule,
-            routes_general_1.routing
+            routes_general_1.routing,
+            routes_general_2.admin_routing
         ],
-        declarations: [app_component_1.AppComponent, login_component_1.LoginComponent, doc_component_1.DocComponent, admin_component_1.AdminComponent, admin_register_user_component_1.RegisterUserComponent, admin_manager_user_component_1.ManagerUserComponent, admin_project_component_1.ProjectComponent],
+        declarations: [
+            app_component_1.AppComponent,
+            login_component_1.LoginComponent,
+            doc_component_1.DocComponent,
+            admin_component_1.AdminComponent,
+            admin_register_user_component_1.RegisterUserComponent,
+            admin_manager_user_component_1.ManagerUserComponent,
+            admin_project_component_1.ProjectComponent,
+            tab_1.Tab,
+            tabs_1.Tabs
+        ],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

@@ -37,6 +37,14 @@ var ProjectComponent = (function () {
             });
         }
     };
+    ProjectComponent.prototype.removeProject = function (project) {
+        var _this = this;
+        this.atualizarAlert('Deletando projeto...', "alert-info");
+        this._projectService.deleteProject(project).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
+            _this.atualizarAlert('Projeto ' + project.name + ' deletado com sucesso !', "alert-info");
+            _this.projects.splice(_this.projects.indexOf(project), 1);
+        });
+    };
     ProjectComponent.prototype.atualizarAlert = function (mensagem, severity) {
         this.message.message = mensagem;
         this.message.severity = severity;

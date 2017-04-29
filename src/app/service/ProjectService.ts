@@ -16,6 +16,10 @@ export class ProjectService extends Service{
         return this.post('project-api/save',project);
     }
 
+    deleteProject(project:Project):Observable<Project>{
+        return this.post('project-api/remove',project);
+    }
+
     loadProjects():Project[]{
         let projects:Project[] = [];
         this.get('project-api/findAllProjects','').subscribe(response=>{

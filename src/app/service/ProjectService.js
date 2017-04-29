@@ -31,6 +31,9 @@ var ProjectService = (function (_super) {
     ProjectService.prototype.saveProject = function (project) {
         return this.post('project-api/save', project);
     };
+    ProjectService.prototype.deleteProject = function (project) {
+        return this.post('project-api/remove', project);
+    };
     ProjectService.prototype.loadProjects = function () {
         var projects = [];
         this.get('project-api/findAllProjects', '').subscribe(function (response) {

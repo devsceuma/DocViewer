@@ -18,17 +18,39 @@ var RegisterUserComponent = (function () {
     function RegisterUserComponent(_userService) {
         this._userService = _userService;
         this.message = { message: '', severity: '' };
+        this.messages = [{ message: '', severity: '' }];
     }
     RegisterUserComponent.prototype.ngOnInit = function () {
     };
     RegisterUserComponent.prototype.registerUser = function (form) {
         var _this = this;
-        if (form.confirmPassword != form.password) {
-            this.atualizarAlert("As senhas precisam coincidir", "alert-danger");
+        if (this.validationSuccessfully(form)) {
+            this._userService.addUser(new User_1.User(form)).subscribe(function (data) { console.log(data); }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
+                _this.messages = [];
+                _this.messages.push({ message: 'Usuário inserido com sucesso :)', severity: 'alert-info' });
+            });
         }
-        else {
-            this._userService.addUser(new User_1.User(form)).subscribe(function (data) { console.log(data); }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () { _this.atualizarAlert("Usuário inserido com sucesso !", "alert-info"); });
+    };
+    RegisterUserComponent.prototype.validationSuccessfully = function (form) {
+        var validated = true;
+        this.messages = [];
+        if ((form.confirmPassword != form.password) && (form.password != '' && form.confirmPassword != '')) {
+            this.messages.push({ message: 'As senhas digitadas são diferentes, por favor verifique', severity: 'alert-danger' });
+            validated = false;
         }
+        if (typeof form.username == 'undefined' || form.username == '') {
+            this.messages.push({ message: 'O campo \'Username\' é obrigatório, por favor verifique', severity: 'alert-danger' });
+            validated = false;
+        }
+        if (typeof form.password == 'undefined' || form.password == '') {
+            this.messages.push({ message: 'O campo \'Senha\' é obrigatório, por favor verifique', severity: 'alert-danger' });
+            validated = false;
+        }
+        if (typeof form.confirmPassword == 'undefined' || form.confirmPassword == '') {
+            this.messages.push({ message: 'Você precisa confirmar sua senha no campo \'Digite a senha novamente\', por favor verifique', severity: 'alert-danger' });
+            validated = false;
+        }
+        return validated;
     };
     RegisterUserComponent.prototype.atualizarAlert = function (mensagem, severity) {
         this.message.message = mensagem;

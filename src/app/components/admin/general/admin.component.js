@@ -10,10 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var User_1 = require("./../../../models/User");
+var LoginService_1 = require("./../../../service/LoginService");
+var router_1 = require("@angular/router");
 var AdminComponent = (function () {
-    function AdminComponent() {
+    function AdminComponent(_router, _userService) {
+        this._router = _router;
+        this._userService = _userService;
     }
-    AdminComponent.prototype.capturarclique = function () { };
+    AdminComponent.prototype.ngOnInit = function () {
+        if (localStorage.getItem("currentUser") != null) {
+            this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
+        }
+        else {
+            this._router.navigate(['']);
+        }
+    };
+    AdminComponent.prototype.logout = function () {
+        this._userService.signout();
+    };
     return AdminComponent;
 }());
 AdminComponent = __decorate([
@@ -21,8 +36,9 @@ AdminComponent = __decorate([
         selector: 'admin-panel',
         templateUrl: './admin.html',
         styleUrls: ['./../../../../assets/css/light-bootstrap-dashboard.css', './../../../../assets/css/demo.css'],
+        providers: [LoginService_1.LoginService]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [router_1.Router, LoginService_1.LoginService])
 ], AdminComponent);
 exports.AdminComponent = AdminComponent;
 //# sourceMappingURL=admin.component.js.map

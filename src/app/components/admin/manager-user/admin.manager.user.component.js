@@ -11,10 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var UserService_1 = require("./../../../service/UserService");
+var ProjectService_1 = require("./../../../service/ProjectService");
 var User_1 = require("./../../../models/User");
 var ManagerUserComponent = (function () {
-    function ManagerUserComponent(_userService) {
+    function ManagerUserComponent(_userService, _projectService) {
         this._userService = _userService;
+        this._projectService = _projectService;
+        this.projects = [];
         this.rows = [];
         this.message = { message: '', severity: '' };
         this.sortOrder = "asc";
@@ -22,6 +25,7 @@ var ManagerUserComponent = (function () {
     }
     ManagerUserComponent.prototype.ngOnInit = function () {
         this.rows = this._userService.loadUsers();
+        this.projects = this._projectService.loadProjects();
     };
     ManagerUserComponent.prototype.getUserDetail = function (user) {
         this.showDetail = true;
@@ -33,6 +37,7 @@ var ManagerUserComponent = (function () {
         this._userService.deleteUser(user).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
             _this.atualizarAlert('Usuário ' + user.name + ' deletado com sucesso !', "alert-info");
             _this.rows.splice(_this.rows.indexOf(user), 1);
+            _this.showDetail = false;
         });
     };
     ManagerUserComponent.prototype.updateUser = function (form) {
@@ -45,6 +50,28 @@ var ManagerUserComponent = (function () {
             _this.rows = _this._userService.loadUsers();
         });
     };
+    ManagerUserComponent.prototype.switchPermission = function (project) {
+        if (this.permissionAlreadyAssigned(project)) {
+            this.userSelected.projects.splice(this.userSelected.projects.indexOf(project), 1);
+        }
+        else {
+            if (this.userSelected.projects == null) {
+                this.userSelected.projects = [];
+            }
+            this.userSelected.projects.push(project);
+        }
+    };
+    ManagerUserComponent.prototype.permissionAlreadyAssigned = function (project) {
+        var status = false;
+        if (this.userSelected.projects != null) {
+            this.userSelected.projects.filter(function (item) {
+                if (item.name == project.name) {
+                    status = true;
+                }
+            });
+        }
+        return status;
+    };
     ManagerUserComponent.prototype.atualizarAlert = function (mensagem, severity) {
         this.message.message = mensagem;
         this.message.severity = severity;
@@ -55,10 +82,10 @@ ManagerUserComponent = __decorate([
     core_1.Component({
         selector: 'manager-user-form',
         templateUrl: './manager-user.html',
-        styleUrls: ['./../../../../assets/css/light-bootstrap-dashboard.css', './../../../../assets/css/demo.css'],
-        providers: [UserService_1.UserService]
+        styleUrls: ['./../../../../assets/css/light-bootstrap-dashboard.css', './../../../../assets/css/demo.css', './custom.css'],
+        providers: [UserService_1.UserService, ProjectService_1.ProjectService]
     }),
-    __metadata("design:paramtypes", [UserService_1.UserService])
+    __metadata("design:paramtypes", [UserService_1.UserService, ProjectService_1.ProjectService])
 ], ManagerUserComponent);
 exports.ManagerUserComponent = ManagerUserComponent;
 //# sourceMappingURL=admin.manager.user.component.js.map

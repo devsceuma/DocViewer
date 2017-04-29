@@ -9,6 +9,8 @@ var User = (function () {
         this.password = obj.password;
         this.organization = obj.organization;
         this.job = obj.job;
+        this.profile = obj.profile;
+        this.projects = obj.projects;
     }
     return User;
 }());
