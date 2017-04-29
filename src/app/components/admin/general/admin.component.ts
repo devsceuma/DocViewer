@@ -20,6 +20,9 @@ export class AdminComponent implements OnInit{
     ngOnInit(){
         if(localStorage.getItem("currentUser") != null){
             this.user = new User(JSON.parse(localStorage.getItem("currentUser")));
+            if(this.user.profile != 'AD'){
+                this._router.navigate(['']);
+            }
         }else{
             this._router.navigate(['']);
         }

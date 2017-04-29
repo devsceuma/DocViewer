@@ -21,6 +21,9 @@ var AdminComponent = (function () {
     AdminComponent.prototype.ngOnInit = function () {
         if (localStorage.getItem("currentUser") != null) {
             this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
+            if (this.user.profile != 'AD') {
+                this._router.navigate(['']);
+            }
         }
         else {
             this._router.navigate(['']);

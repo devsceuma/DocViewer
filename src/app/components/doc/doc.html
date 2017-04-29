@@ -1,2 +1,48 @@
-<h3>DOC {{user.name}}</h3>
-<a routerLink='/admin' *ngIf="user.profile === 'AD'">GO TO ADMIN PANEL</a>
+        <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i>
+                    <!--<img src="assets/img/Ceuma-logo.png" width="50" class="img-logo" />-->
+                </div>
+            </div>
+
+            <!--logo start-->
+            <a class="logo">Doc <span class="lite">Viewer</span></a>
+            <!--logo end-->
+
+            <div class="nav search-row" id="top_menu">
+                <!--  search form start -->
+                        <ul class="nav top-menu">
+                            <li>
+                                <form class="navbar-form">
+                                    <select class="form-control" id="selectClassMeth">
+                                        <option *ngFor="let item of user.projects">{{item.name}}</option>
+                                    </select>
+                                    <input value="Buscar Documentação" type="button" class="btn btn-primary" onclick="loaderController.loadJsonByProject(event)">
+                               </form>
+                            </li>
+                        </ul>
+                <!--  search form end -->
+            </div>
+
+            <div class="top-nav notification-row">
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle">
+                            Olá,{{user.name}}
+                        </a>
+                    </li>
+                    <li class="dropdown" *ngIf="user.profile === 'AD'">
+                         <button routerLink="/admin" class="btn btn-primary btn-fill dropdown-toggle">Painel Administrativo</button>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" (click)="deslogar()">
+                            <p>Sair</p>
+                        </a>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+        </header>
+

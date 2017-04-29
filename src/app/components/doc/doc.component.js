@@ -11,27 +11,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
+var LoginService_1 = require("./../../service/LoginService");
 var User_1 = require("./../../models/User");
 var DocComponent = (function () {
-    function DocComponent(router) {
+    function DocComponent(router, _loginService) {
         this.router = router;
+        this._loginService = _loginService;
     }
     DocComponent.prototype.ngOnInit = function () {
-        /*if(localStorage.getItem("currentUser") != null){
-            this.user = new User(JSON.parse(localStorage.getItem("currentUser")));
-        }else{
+        if (localStorage.getItem("currentUser") != null) {
+            this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
+        }
+        else {
             this.router.navigate(['']);
-        }*/
-        this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
+        }
+    };
+    DocComponent.prototype.deslogar = function () {
+        this._loginService.signout();
     };
     return DocComponent;
 }());
 DocComponent = __decorate([
     core_1.Component({
         selector: 'doc',
-        templateUrl: './doc.html'
+        templateUrl: './doc.html',
+        styleUrls: ['./style_layout.css'],
+        providers: [LoginService_1.LoginService]
     }),
-    __metadata("design:paramtypes", [router_1.Router])
+    __metadata("design:paramtypes", [router_1.Router, LoginService_1.LoginService])
 ], DocComponent);
 exports.DocComponent = DocComponent;
 //# sourceMappingURL=doc.component.js.map
