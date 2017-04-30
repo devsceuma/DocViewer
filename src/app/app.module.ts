@@ -1,5 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms';
 import {DataTableModule} from "angular2-datatable";
 import { HttpModule, JsonpModule} from '@angular/http';
@@ -20,6 +21,7 @@ import {admin_routing} from './routes.general';
   imports:[
   DataTableModule,
   BrowserModule,
+  BrowserAnimationsModule,
   FormsModule, 
   HttpModule, 
   JsonpModule,

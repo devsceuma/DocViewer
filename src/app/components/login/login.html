@@ -11,6 +11,6 @@
                 </form>
             </div>
             <br>
-            <div class="alert {{message.severity}}" role="alert" *ngIf="message.message.length>0 ">{{message.message}}</div>
+            <div class="alert {{message.severity}}" [@feedBackMessageTrigger]="feedbackMessage" role="alert">{{message.message}}</div>
         </div>
 </div>

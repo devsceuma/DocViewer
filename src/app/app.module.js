@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
+var animations_1 = require("@angular/platform-browser/animations");
 var forms_1 = require("@angular/forms");
 var angular2_datatable_1 = require("angular2-datatable");
 var http_1 = require("@angular/http");
@@ -32,6 +33,7 @@ AppModule = __decorate([
         imports: [
             angular2_datatable_1.DataTableModule,
             platform_browser_1.BrowserModule,
+            animations_1.BrowserAnimationsModule,
             forms_1.FormsModule,
             http_1.HttpModule,
             http_1.JsonpModule,

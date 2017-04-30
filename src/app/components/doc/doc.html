@@ -13,11 +13,12 @@
                 <!--  search form start -->
                         <ul class="nav top-menu">
                             <li>
-                                <form class="navbar-form">
-                                    <select class="form-control" id="selectClassMeth">
-                                        <option *ngFor="let item of user.projects">{{item.name}}</option>
+                                <form #form="ngForm"  class="navbar-form" (ngSubmit)="loadDocumentation(form.value)" method="POST">
+                                    <select class="form-control" name="projeto" id="selectClassMeth" ngModel>
+                                        <option *ngFor="let item of user.projects" [ngValue]="item">{{item.name}}</option>
                                     </select>
-                                    <input value="Buscar Documentação" type="button" class="btn btn-primary" onclick="loaderController.loadJsonByProject(event)">
+                                    <button type="submit" class="btn btn-primary"> Buscar Documentação </button>
+                                    <div class="clearfix"></div>
                                </form>
                             </li>
                         </ul>

@@ -23,7 +23,7 @@ export class RegisterUserComponent implements OnInit{
     registerUser(form:any){
         if(this.validationSuccessfully(form)){
              this._userService.addUser(new User(form)).subscribe(
-                data=>{console.log(data)},
+                data=>{console.log(new User(form))},
                 error=>{this.atualizarAlert(error,"alert-danger")},
                 ()=>{
                      this.messages = [];

@@ -18,8 +18,11 @@ require("rxjs/add/observable/throw");
 var Service = (function () {
     function Service(_http) {
         this._http = _http;
-        this._urlMaster = "http://localhost:8080/";
+        this._urlMaster = "http://localhost:8080/docViewer/";
     }
+    Service.prototype.getDocumentation = function (api) {
+        return this._http.get(api).map(this._extractData).catch(this._handleError);
+    };
     Service.prototype.post = function (api, params) {
         return this._http.post(this._urlMaster + api, params, this._getHeaders('P')).catch(this._handleError);
     };

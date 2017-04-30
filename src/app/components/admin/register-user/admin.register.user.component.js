@@ -25,7 +25,7 @@ var RegisterUserComponent = (function () {
     RegisterUserComponent.prototype.registerUser = function (form) {
         var _this = this;
         if (this.validationSuccessfully(form)) {
-            this._userService.addUser(new User_1.User(form)).subscribe(function (data) { console.log(data); }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
+            this._userService.addUser(new User_1.User(form)).subscribe(function (data) { console.log(new User_1.User(form)); }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
                 _this.messages = [];
                 _this.messages.push({ message: 'Usuário inserido com sucesso :)', severity: 'alert-info' });
             });

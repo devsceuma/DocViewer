@@ -17,16 +17,36 @@ var AdminComponent = (function () {
     function AdminComponent(_router, _userService) {
         this._router = _router;
         this._userService = _userService;
+        this.autenticateAdmin = true;
+        this.userGenerated = { id: "5904c8c2eedce401888056ce",
+            name: "Marcus Vinicius Cartagenes",
+            username: "marcus",
+            password: "202cb962ac59075b964b07152d234b70",
+            email: "mvcartagenes@gmail.com",
+            organization: "Universidade Ceuma",
+            job: "Desenvolvedor de Sistemas",
+            projects: [{ "id": "59049fddeedce43b1645b591",
+                    url: "www.ceuma.br/ServicosOnline",
+                    name: "ServicosOnline" }],
+            profile: "AD" };
     }
     AdminComponent.prototype.ngOnInit = function () {
-        if (localStorage.getItem("currentUser") != null) {
-            this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
-            if (this.user.profile != 'AD') {
+        this.validateSession();
+    };
+    AdminComponent.prototype.validateSession = function () {
+        if (this.autenticateAdmin) {
+            if (localStorage.getItem("currentUser") != null) {
+                this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
+                if (this.user.profile != 'AD') {
+                    this._router.navigate(['']);
+                }
+            }
+            else {
                 this._router.navigate(['']);
             }
         }
         else {
-            this._router.navigate(['']);
+            this.user = new User_1.User(this.userGenerated);
         }
     };
     AdminComponent.prototype.logout = function () {

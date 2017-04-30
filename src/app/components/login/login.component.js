@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var animations_1 = require("@angular/animations");
 var router_1 = require("@angular/router");
 var LoginService_1 = require("./../../service/LoginService");
 var LoginComponent = (function () {
@@ -19,6 +20,7 @@ var LoginComponent = (function () {
         this.message = { message: '', severity: '' };
         this.credentials = { user: "", pwd: "" };
         this.autenticate = true;
+        this.feedbackMessage = "disabled";
     }
     LoginComponent.prototype.ngOnInit = function () {
         this._loginService.signout();
@@ -27,14 +29,14 @@ var LoginComponent = (function () {
         var _this = this;
         if (this.autenticate) {
             if (this.credentials.user == "" || this.credentials.pwd == "") {
-                this.atualizarAlert('Digite os campos de usuário e senha', 'alert-danger');
+                this.atualizarAlert('Digite os campos de usuário e senha', 'alert-danger', 'enabled');
             }
             else {
                 this._loginService.signin(this.credentials.user, this.credentials.pwd).subscribe(function (data) {
                     _this._router.navigate(['doc']);
-                    _this.atualizarAlert('', '');
+                    _this.atualizarAlert('', '', 'disabled');
                 }, function (error) {
-                    _this.atualizarAlert('Usuário ou senha incorreta', 'alert-danger');
+                    _this.atualizarAlert('Usuário ou senha incorreta', 'alert-danger', 'enabled');
                 });
             }
         }
@@ -42,7 +44,8 @@ var LoginComponent = (function () {
             this._router.navigate(['doc']);
         }
     };
-    LoginComponent.prototype.atualizarAlert = function (mensagem, severity) {
+    LoginComponent.prototype.atualizarAlert = function (mensagem, severity, state) {
+        this.feedbackMessage = state;
         this.message.message = mensagem;
         this.message.severity = severity;
     };
@@ -53,7 +56,15 @@ LoginComponent = __decorate([
         selector: 'login',
         templateUrl: "./login.html",
         styleUrls: ['./login.css'],
-        providers: [LoginService_1.LoginService]
+        providers: [LoginService_1.LoginService],
+        animations: [
+            animations_1.trigger("feedBackMessageTrigger", [
+                animations_1.state("disabled", animations_1.style({ opacity: 0 })),
+                animations_1.state("enabled", animations_1.style({ opacity: 1 })),
+                animations_1.transition("disabled => enabled", animations_1.animate("300ms ease-in")),
+                animations_1.transition("enabled => disabled", animations_1.animate("300ms ease-out"))
+            ])
+        ]
     }),
     __metadata("design:paramtypes", [LoginService_1.LoginService, router_1.Router])
 ], LoginComponent);

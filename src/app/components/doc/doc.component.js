@@ -13,18 +13,41 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var LoginService_1 = require("./../../service/LoginService");
 var User_1 = require("./../../models/User");
+var Project_1 = require("./../../models/Project");
+var DocumentationService_1 = require("../../service/DocumentationService");
 var DocComponent = (function () {
-    function DocComponent(router, _loginService) {
+    function DocComponent(router, _loginService, _documentationService) {
         this.router = router;
         this._loginService = _loginService;
+        this._documentationService = _documentationService;
+        this.autenticate = true;
+        this.userGenerated = { id: "5904c8c2eedce401888056ce",
+            name: "Marcus Vinicius Cartagenes",
+            username: "marcus",
+            password: "202cb962ac59075b964b07152d234b70",
+            email: "mvcartagenes@gmail.com",
+            organization: "Universidade Ceuma",
+            job: "Desenvolvedor de Sistemas",
+            projects: [{ "id": "59049fddeedce43b1645b591",
+                    url: "www.ceuma.br/ServicosOnline",
+                    name: "ServicosOnline" }],
+            profile: "AD" };
     }
     DocComponent.prototype.ngOnInit = function () {
-        if (localStorage.getItem("currentUser") != null) {
-            this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
+        if (this.autenticate) {
+            if (localStorage.getItem("currentUser") != null) {
+                this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
+            }
+            else {
+                this.router.navigate(['']);
+            }
         }
         else {
-            this.router.navigate(['']);
+            this.user = new User_1.User(this.userGenerated);
         }
+    };
+    DocComponent.prototype.loadDocumentation = function (obj) {
+        this._documentationService.getDoc(new Project_1.Project(obj.projeto));
     };
     DocComponent.prototype.deslogar = function () {
         this._loginService.signout();
@@ -36,9 +59,9 @@ DocComponent = __decorate([
         selector: 'doc',
         templateUrl: './doc.html',
         styleUrls: ['./style_layout.css'],
-        providers: [LoginService_1.LoginService]
+        providers: [LoginService_1.LoginService, DocumentationService_1.DocumentationService]
     }),
-    __metadata("design:paramtypes", [router_1.Router, LoginService_1.LoginService])
+    __metadata("design:paramtypes", [router_1.Router, LoginService_1.LoginService, DocumentationService_1.DocumentationService])
 ], DocComponent);
 exports.DocComponent = DocComponent;
 //# sourceMappingURL=doc.component.js.map

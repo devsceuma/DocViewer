@@ -8,10 +8,14 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class Service{
 
-    private _urlMaster:string = "http://localhost:8080/";
+    private _urlMaster:string = "http://localhost:8080/docViewer/";
 
     constructor(private _http:Http){
 
+    }
+
+    protected getDocumentation(api:string):Observable<any>{
+        return this._http.get(api).map(this._extractData).catch(this._handleError);
     }
 
     protected post(api:string,params:any):Observable<any>{
