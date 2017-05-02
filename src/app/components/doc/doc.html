@@ -47,3 +47,74 @@
             </div>
         </header>
 
+<section id="main-content" *ngIf="currentProject">
+    <section class="wrapper">
+        <!-- CLASSES -->
+        <form #form="ngForm" (ngSubmit)="filterDocument(form.value)" method="POST">
+            <div class="row">
+                 <div class="col-md-2">
+                    <select [(ngModel)]="filter.type" name="type" class="form-control">
+                        <option value="CLASSE">Classe</option>
+                        <option value="METHOD">Método</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="filter.value" name="value" type="text" class="form-control"/>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+            </div>
+        </form>
+        <p-accordion class="ui-widget">
+            <p-accordionTab header="Classe: {{classe.name}}" *ngFor="let classe of currentProject.classes">
+                <p-accordion>
+                    <p-accordionTab header="{{method.description}}" *ngFor="let method of classe.methods">
+                        <div class="template-details">
+                            <div class="method-detail">
+                                <h4><b>Informações do Método</b></h4>
+                                <hr/>
+                                <div class="method-info">
+                                    <span class="glyphicon glyphicon-globe"></span> <b>URL:</b> {{classe.url}}{{method.url}}<br/>
+                                </div>
+
+                                <div class="method-info">
+                                    <span class="glyphicon glyphicon-export"></span> <b>TypeRequest:</b> {{method.typesRequest}}
+                                </div>
+                                <br/>
+                                <h4> <b>Parâmetros</b> </h4>
+                                <hr/>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Descrição</th>
+                                            <th>Nome</th>
+                                            <th>Opcional</th>
+                                            <th>Tipo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let param of method.parameters">
+                                            <td>{{param.description}}</td>
+                                            <td>{{param.name}}</td>
+                                            <td>{{param.optional}}</td>
+                                            <td>{{param.type}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br/>
+                                <h4><b> Exemplo de Retorno</b></h4>
+                                <hr/>
+                                <pre>
+                                    {{method.onSucess}}
+                                </pre>
+                            </div>
+                        </div>
+                    </p-accordionTab>
+                </p-accordion>
+            </p-accordionTab>
+        </p-accordion>
+        <!-- CLASSES -->
+    </section>
+</section>
+<!-- EXIBIÇÃO DOS DADOS DO PROJETO -->

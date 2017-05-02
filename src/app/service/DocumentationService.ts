@@ -13,10 +13,13 @@ export class DocumentationService extends Service{
 
 
     getDoc(project:Project):Observable<any>{
-        this.getDocumentation(project.url).subscribe(data=>{
-            console.log(data);
+        return this.getDocumentation(project.url);
+        
+       /*.subscribe(data=>{
+            let project = new ProjectDocumented(data);
+            console.log(project);
         })
-        return null;
+        return null;*/
     }
 
 }

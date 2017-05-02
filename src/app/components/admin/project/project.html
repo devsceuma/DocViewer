@@ -1,26 +1,26 @@
         <div class="container">
                 <h2>Inserir novo projeto</h2>
                 <hr/>
-                  <div class="alert {{message.severity}}" role="alert" *ngIf="message.message.length>0 ">{{message.message}}</div>
+                <p-messages [value]="msgs" sticky="sticky" styleClass="ui-growl-image"></p-messages>
                 <!-- START ADD USER FORM -->
                 <form #form="ngForm" (ngSubmit)="saveProject(form.value)"  method="POST">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Nome do Projeto</label>
-                            <input type="text" name="name" required="required" class="form-control" placeholder="Ex: Servicos Online" ngModel required>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Nome do Projeto</label>
+                                <input type="text" name="name" required="required" class="form-control" placeholder="Ex: Servicos Online" ngModel required>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>URL Master</label>
+                                <input type="text" class="form-control" name="url" placeholder="Ex: www.ceuma.br/ServicosOnline" ngModel>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label>URL Master</label>
-                            <input type="text" class="form-control" name="url" placeholder="Ex: www.ceuma.br/ServicosOnline" ngModel>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-info btn-fill pull-left">Inserir Projeto</button>
-                <div class="clearfix"></div>
-            </form>
+                    <button type="submit" class="btn btn-info btn-fill pull-left">Inserir Projeto</button>
+                    <div class="clearfix"></div>
+                </form>
             <br/><br/>
              <div class="panel panel-default">
                 <table class="table table-striped" [mfData]="projects" #mf="mfDataTable" [mfRowsOnPage]="5" [(mfSortOrder)]="sortOrder">
@@ -32,7 +32,7 @@
                         <th style="width: 30%">
                             <mfDefaultSorter by="email">URL Master</mfDefaultSorter>
                         </th>
-                        <th style="width: 3%"></th>
+                        <th style="width: 3%">Editar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,7 +40,7 @@
                             <td>{{item.name}}</td>
                             <td>{{item.url}}</td>
                             <td>
-                            <button (click)="removeProject(item)" class="btn btn-danger" data-toggle="modal"  data-target="#myModal"><span class="glyphicon glyphicon-remove"></span></button>
+                                <button (click)="getProjectDetails(item)" class="btn btn-info btn-fill"><span class="glyphicon glyphicon-cog"></span></button>
                             </td>
                         </tr>
                     </tbody>
@@ -53,4 +53,24 @@
                     </tfoot>
                 </table>
             </div>
+            <p-panel header="Projeto {{projectSelected.name}}" [toggleable]="true" *ngIf="projectSelected" [style]="{'margin-bottom':'20px'}">
+                <form #form="ngForm" (ngSubmit)="updateProject(form.value)"  method="POST">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Nome do Projeto</label>
+                                <input type="text" name="name" required="required" class="form-control" [(ngModel)]="projectSelected.name" placeholder="Ex: Servicos Online" ngModel>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>URL Master</label>
+                                <input type="text" class="form-control" name="url" [(ngModel)]="projectSelected.url" placeholder="Ex: www.ceuma.br/ServicosOnline" ngModel>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info btn-fill pull-right">Atualizar Projeto</button>
+                    <div class="clearfix"></div>
+                </form>
+            </p-panel>
 </div>

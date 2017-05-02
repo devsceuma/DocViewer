@@ -4,18 +4,28 @@ import {LoginService} from './../../service/LoginService';
 import {User} from './../../models/User';
 import {Project} from './../../models/Project';
 import {DocumentationService} from '../../service/DocumentationService';
-
+import {ProjectDocumented} from './../../models/ProjectDocumented';
 
 @Component({
     selector: 'doc',
     templateUrl: './doc.html',
-    styleUrls:['./style_layout.css'],
+    styleUrls:['./style_layout.css','./style_responsive.css','./style.css'],
     providers:[LoginService,DocumentationService]
 })
 export class DocComponent implements OnInit{
 
-    user:User;
+    private renderMethod:boolean = true;
+    private renderConstructor:boolean = true;
+
+    private filter={type:'',value:''}
+    private currentProject:ProjectDocumented;
+    private currentProjectSafety:any;
+
+    private user:User;
     private autenticate:boolean = true;
+    
+    
+    
     private userGenerated={id:"5904c8c2eedce401888056ce",
             name:"Marcus Vinicius Cartagenes",
             username:"marcus",
@@ -44,7 +54,34 @@ export class DocComponent implements OnInit{
     }
 
     loadDocumentation(obj:any){
-        this._documentationService.getDoc(new Project(obj.projeto));
+        this._documentationService.getDoc(new Project(obj.projeto))
+        .subscribe(
+        data=>{this.currentProject = new ProjectDocumented(data); this.currentProjectSafety = data},
+        error=>{ /*TODO TRATAR ERROR */});
+    }
+
+    filterDocument(obj:any){
+        if(obj.value === "" || obj.type === ""){
+            this.currentProject = new ProjectDocumented(this.currentProjectSafety);
+        }
+        if(obj.type === 'CLASSE' && obj.value != ""){
+            this.currentProject.classes.forEach((unity:any)=>{
+                if(unity.name.indexOf(obj.value) === -1){
+                    console.log(unity.name+" Não contêm "+obj.value);
+                    this.currentProject.classes.splice(this.currentProject.classes.indexOf(unity),1);
+                }
+            });
+        }else if(obj.type === 'METHOD' && obj.value != ""){
+            this.currentProject.classes.forEach((unity:any)=>{
+                unity.methods.forEach((method:any)=>{
+                    if(method.name.toUpperCase() != obj.value.toUpperCase()){
+                       console.log("Método "+method.name+" precisa ser deletado");
+                    }
+                })
+            })
+        }else{
+            this.currentProject = new ProjectDocumented(this.currentProjectSafety);
+        }
     }
 
     deslogar(){

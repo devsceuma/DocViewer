@@ -17,7 +17,7 @@ var AdminComponent = (function () {
     function AdminComponent(_router, _userService) {
         this._router = _router;
         this._userService = _userService;
-        this.autenticateAdmin = true;
+        this.autenticateAdmin = false;
         this.userGenerated = { id: "5904c8c2eedce401888056ce",
             name: "Marcus Vinicius Cartagenes",
             username: "marcus",

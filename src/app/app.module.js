@@ -15,6 +15,7 @@ var http_1 = require("@angular/http");
 var login_component_1 = require("./components/login/login.component");
 var doc_component_1 = require("./components/doc/doc.component");
 var app_component_1 = require("./app.component");
+var primeng_1 = require("primeng/primeng");
 var tab_1 = require("./components/admin/manager-user/tab");
 var tabs_1 = require("./components/admin/manager-user/tabs");
 var admin_component_1 = require("./components/admin/general/admin.component");
@@ -34,9 +35,14 @@ AppModule = __decorate([
             angular2_datatable_1.DataTableModule,
             platform_browser_1.BrowserModule,
             animations_1.BrowserAnimationsModule,
+            primeng_1.TabViewModule,
             forms_1.FormsModule,
+            primeng_1.GrowlModule,
+            primeng_1.PanelModule,
             http_1.HttpModule,
             http_1.JsonpModule,
+            primeng_1.MessagesModule,
+            primeng_1.AccordionModule,
             routes_general_1.routing,
             routes_general_2.admin_routing
         ],

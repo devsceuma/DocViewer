@@ -56,29 +56,27 @@
       </tfoot>
     </table>
   </div>
-  <div class="panel panel-default" *ngIf="showDetail">
-    <div class="panel-heading">Detalhes de {{userSelected.name}}</div>
-      <div style="padding:0px 10px 0px 10px">
-        <tabs>
-          <tab [tabTitle]="'Dados Cadastrais'">
-              <form #form="ngForm" (ngSubmit)="updateUser(form.value)"  method="POST">
+
+<p-tabView  *ngIf="userSelected">
+    <p-tabPanel header="Dados Pessoais {{userSelected.name}}">
+                  <form #form="ngForm" (ngSubmit)="updateUser(form.value)"  method="POST">
                       <div class="row">
                           <div class="col-md-4">
                               <div class="form-group">
-                                  <label for="exampleInputEmail">Nome Completo</label>
-                                  <input type="email" name="name" value="{{userSelected.name}}" autocomplete="off" class="form-control" ngModel required>
+                                  <label>Nome Completo</label>
+                                    <input type="text" name="name" required="required" [(ngModel)]="userSelected.name" class="form-control" ngModel>
                               </div>
                           </div>
                           <div class="col-md-4">
                               <div class="form-group">
                                   <label for="exampleInputEmail">Email</label>
-                                  <input type="email" value="{{userSelected.email}}" class="form-control" name="email" ngModel required>
+                                  <input type="email" [(ngModel)]="userSelected.email" class="form-control" name="email" ngModel>
                               </div>
                           </div>
                           <div class="col-md-4">
                               <div class="form-group">
                                   <label>Empresa</label>
-                                  <input type="email" class="form-control" value="{{userSelected.organization}}" name="organization" placeholder="Universidade Ceuma" ngModel>
+                                  <input type="text" class="form-control" [(ngModel)]="userSelected.organization" name="organization" placeholder="Universidade Ceuma" ngModel>
                               </div>
                           </div>
                       </div>
@@ -86,22 +84,22 @@
                           <div class="col-md-3">
                               <div class="form-group">
                                   <label>Cargo</label>
-                                  <input type="email" class="form-control" value="{{userSelected.job}}" name="job" ngModel>
+                                  <input type="text" class="form-control" [(ngModel)]="userSelected.job" name="job" ngModel>
                               </div>
                           </div>
                           <div class="col-md-3">
                               <div class="form-group">
                                   <label>Senha</label>
-                                  <input type="password" name="password" autocomplete="off" value="{{userSelected.password}}" class="form-control" ngModel>
+                                  <input type="password" name="password" [(ngModel)]="userSelected.password" class="form-control" ngModel>
                               </div>
                           </div>
                       </div>
                       <button type="submit" class="btn btn-info btn-fill pull-right" id="load">Atualizar Usuário</button>
                       <div class="clearfix"></div>
                   </form>
-                </tab>
-                <tab tabTitle="Projetos">
-                  <form #form="ngForm" (ngSubmit)="updateUser(userSelected)"  method="POST">
+    </p-tabPanel>
+    <p-tabPanel header="Gerenciar Permissões">
+        <form #form="ngForm" (ngSubmit)="updateUser(userSelected)"  method="POST">
                     <table class="table table-hover">
                       <thead>
                           <tr>
@@ -124,30 +122,6 @@
                       </tbody>
                     </table>
                     <button type="submit" class="btn btn-info btn-fill pull-right" id="load">Atualizar Usuário</button>
-                  </form>
-                </tab>
-          </tabs>
-            <br/><br/>
-          </div>
-    </div>
-</div>
-
-
-<!-- 
-  CHECKBOX
-  
-<td>
-  <div class="[ form-group ]">
-    <input type="checkbox" [checked]="permissionAlreadyAssigned(item)"  (change)="switchPermission(item)" value="item" id="fancy-checkbox-default" autocomplete="off" />
-    <div class="[ btn-group ]">
-        <label for="fancy-checkbox-default" class="[ btn btn-default ]">
-            <span class="[ glyphicon glyphicon-ok ]"></span>
-            <span> </span>
-        </label>
-        <label for="fancy-checkbox-default" class="[ btn btn-default active ]">
-            Default Checkbox
-        </label>
-    </div>
-  </div>
-</td>
--->
+          </form>
+    </p-tabPanel>
+</p-tabView>

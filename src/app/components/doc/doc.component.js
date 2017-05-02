@@ -15,11 +15,15 @@ var LoginService_1 = require("./../../service/LoginService");
 var User_1 = require("./../../models/User");
 var Project_1 = require("./../../models/Project");
 var DocumentationService_1 = require("../../service/DocumentationService");
+var ProjectDocumented_1 = require("./../../models/ProjectDocumented");
 var DocComponent = (function () {
     function DocComponent(router, _loginService, _documentationService) {
         this.router = router;
         this._loginService = _loginService;
         this._documentationService = _documentationService;
+        this.renderMethod = true;
+        this.renderConstructor = true;
+        this.filter = { type: '', value: '' };
         this.autenticate = true;
         this.userGenerated = { id: "5904c8c2eedce401888056ce",
             name: "Marcus Vinicius Cartagenes",
@@ -47,7 +51,35 @@ var DocComponent = (function () {
         }
     };
     DocComponent.prototype.loadDocumentation = function (obj) {
-        this._documentationService.getDoc(new Project_1.Project(obj.projeto));
+        var _this = this;
+        this._documentationService.getDoc(new Project_1.Project(obj.projeto))
+            .subscribe(function (data) { _this.currentProject = new ProjectDocumented_1.ProjectDocumented(data); _this.currentProjectSafety = data; }, function (error) { });
+    };
+    DocComponent.prototype.filterDocument = function (obj) {
+        var _this = this;
+        if (obj.value === "" || obj.type === "") {
+            this.currentProject = new ProjectDocumented_1.ProjectDocumented(this.currentProjectSafety);
+        }
+        if (obj.type === 'CLASSE' && obj.value != "") {
+            this.currentProject.classes.forEach(function (unity) {
+                if (unity.name.indexOf(obj.value) === -1) {
+                    console.log(unity.name + " Não contêm " + obj.value);
+                    _this.currentProject.classes.splice(_this.currentProject.classes.indexOf(unity), 1);
+                }
+            });
+        }
+        else if (obj.type === 'METHOD' && obj.value != "") {
+            this.currentProject.classes.forEach(function (unity) {
+                unity.methods.forEach(function (method) {
+                    if (method.name.toUpperCase() != obj.value.toUpperCase()) {
+                        console.log("Método " + method.name + " precisa ser deletado");
+                    }
+                });
+            });
+        }
+        else {
+            this.currentProject = new ProjectDocumented_1.ProjectDocumented(this.currentProjectSafety);
+        }
     };
     DocComponent.prototype.deslogar = function () {
         this._loginService.signout();
@@ -58,7 +90,7 @@ DocComponent = __decorate([
     core_1.Component({
         selector: 'doc',
         templateUrl: './doc.html',
-        styleUrls: ['./style_layout.css'],
+        styleUrls: ['./style_layout.css', './style_responsive.css', './style.css'],
         providers: [LoginService_1.LoginService, DocumentationService_1.DocumentationService]
     }),
     __metadata("design:paramtypes", [router_1.Router, LoginService_1.LoginService, DocumentationService_1.DocumentationService])

@@ -29,7 +29,8 @@ var ManagerUserComponent = (function () {
     };
     ManagerUserComponent.prototype.getUserDetail = function (user) {
         this.showDetail = true;
-        this.userSelected = user;
+        this.userSelected = new User_1.User(user);
+        console.log(this.userSelected);
     };
     ManagerUserComponent.prototype.removeUser = function (user) {
         var _this = this;
@@ -40,13 +41,14 @@ var ManagerUserComponent = (function () {
             _this.showDetail = false;
         });
     };
-    ManagerUserComponent.prototype.updateUser = function (form) {
+    ManagerUserComponent.prototype.updateUser = function (obj) {
         var _this = this;
-        form.username = this.userSelected.username;
-        form.id = this.userSelected.id;
+        console.log(new User_1.User(obj));
+        obj.username = this.userSelected.username;
+        obj.id = this.userSelected.id;
         this.atualizarAlert('Atualizando usuário...', "alert-info");
-        this._userService.updateUser(new User_1.User(form)).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
-            _this.atualizarAlert('Usuário ' + form.name + ' atualizado com sucesso !', "alert-info");
+        this._userService.updateUser(new User_1.User(obj)).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
+            _this.atualizarAlert('Usuário ' + obj.name + ' atualizado com sucesso !', "alert-info");
             _this.rows = _this._userService.loadUsers();
         });
     };

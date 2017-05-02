@@ -3,6 +3,7 @@ import {UserService} from './../../../service/UserService';
 import {Observable} from 'rxjs/Observable';
 import {User} from './../../../models/User';
 import 'rxjs/add/operator/catch';
+import {Message} from 'primeng/primeng';
 
 import 'rxjs/add/operator/catch';
 @Component({
@@ -12,8 +13,7 @@ import 'rxjs/add/operator/catch';
     providers:[UserService]
 })
 export class RegisterUserComponent implements OnInit{
-    message = {message:'',severity:''}
-    messages = [{message:'',severity:''}]
+    msgs:Message[] = []
     constructor(private _userService:UserService){}
 
     ngOnInit(){
@@ -24,10 +24,10 @@ export class RegisterUserComponent implements OnInit{
         if(this.validationSuccessfully(form)){
              this._userService.addUser(new User(form)).subscribe(
                 data=>{console.log(new User(form))},
-                error=>{this.atualizarAlert(error,"alert-danger")},
+                error=>{this.msgs.push({summary:'Erro interno x.x',detail:error,severity:'error'})},
                 ()=>{
-                     this.messages = [];
-                     this.messages.push({message:'Usuário inserido com sucesso :)',severity:'alert-info'})
+                     this.msgs = [];
+                     this.msgs.push({summary:"Atenção",detail:'Usuário inserido com sucesso :)',severity:'info'})
                 }
             )
         }
@@ -35,25 +35,21 @@ export class RegisterUserComponent implements OnInit{
 
     validationSuccessfully(form:any){
         let validated:boolean = true;
-        this.messages = [];
+        this.msgs = [];
         if((form.confirmPassword != form.password) && (form.password != '' && form.confirmPassword != '')){
-            this.messages.push({message:'As senhas digitadas são diferentes, por favor verifique',severity:'alert-danger'})
+            this.msgs.push({summary:"Erro de validação",detail:'As senhas digitadas são diferentes, por favor verifique',severity:'error'})
             validated = false;
         }if(typeof form.username == 'undefined' || form.username == ''){
-            this.messages.push({message:'O campo \'Username\' é obrigatório, por favor verifique',severity:'alert-danger'})
+            this.msgs.push({summary:"Erro de validação",detail:'O campo \'Username\' é obrigatório, por favor verifique',severity:'error'})
             validated = false;
         }if(typeof form.password == 'undefined' || form.password == ''){
-            this.messages.push({message:'O campo \'Senha\' é obrigatório, por favor verifique',severity:'alert-danger'})
+            this.msgs.push({summary:"Erro de validação",detail:'O campo \'Senha\' é obrigatório, por favor verifique',severity:'error'})
             validated = false;
         }if(typeof form.confirmPassword == 'undefined' || form.confirmPassword == ''){
-            this.messages.push({message:'Você precisa confirmar sua senha no campo \'Digite a senha novamente\', por favor verifique',severity:'alert-danger'})
+            this.msgs.push({summary:"Erro de validação",detail:'Você precisa confirmar sua senha no campo \'Digite a senha novamente\', por favor verifique',severity:'error'})
             validated = false;
         }
         return validated;
     }
 
-    atualizarAlert(mensagem:string, severity:string){
-            this.message.message = mensagem;
-            this.message.severity=severity;
-    }
 }

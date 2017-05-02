@@ -28,10 +28,12 @@ var DocumentationService = (function (_super) {
         return _super.call(this, _http) || this;
     }
     DocumentationService.prototype.getDoc = function (project) {
-        this.getDocumentation(project.url).subscribe(function (data) {
-            console.log(data);
-        });
-        return null;
+        return this.getDocumentation(project.url);
+        /*.subscribe(data=>{
+             let project = new ProjectDocumented(data);
+             console.log(project);
+         })
+         return null;*/
     };
     return DocumentationService;
 }(Service_1.Service));

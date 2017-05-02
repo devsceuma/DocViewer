@@ -2,7 +2,7 @@ import {Project} from './Project';
 
 export class User{
 
-    id:string;
+    id:number;
     name:string;
     username:string;
     email:string;

@@ -31,6 +31,9 @@ var ProjectService = (function (_super) {
     ProjectService.prototype.saveProject = function (project) {
         return this.post('project-api/save', project);
     };
+    ProjectService.prototype.updateProject = function (project) {
+        return this.post('project-api/update', project);
+    };
     ProjectService.prototype.deleteProject = function (project) {
         return this.post('project-api/remove', project);
     };

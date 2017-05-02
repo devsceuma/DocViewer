@@ -5,6 +5,7 @@
                      <div class="alert {{message.severity}}" role="alert">{{message.message}}</div>
                   </div>
                 <!-- START ADD USER FORM -->
+                <p-messages [value]="msgs" sticky="sticky" styleClass="ui-growl-image"></p-messages>
                 <form #form="ngForm" (ngSubmit)="registerUser(form.value)"  method="POST">
                 <div class="row">
                     <div class="col-md-3">

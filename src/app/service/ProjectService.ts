@@ -16,6 +16,10 @@ export class ProjectService extends Service{
         return this.post('project-api/save',project);
     }
 
+    updateProject(project:Project):Observable<Project>{
+        return this.post('project-api/update',project);
+    }
+
     deleteProject(project:Project):Observable<Project>{
         return this.post('project-api/remove',project);
     }

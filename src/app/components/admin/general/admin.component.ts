@@ -12,7 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class AdminComponent implements OnInit{
 
     user:User;
-    private autenticateAdmin:boolean = true;
+    private autenticateAdmin:boolean = false;
     
     private userGenerated={id:"5904c8c2eedce401888056ce",
             name:"Marcus Vinicius Cartagenes",

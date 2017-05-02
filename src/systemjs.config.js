@@ -33,7 +33,9 @@
       'lodash': 'npm:lodash/lodash.js',
 	  'angular2-datatable':'npm:angular2-datatable',
       'angular2-cool-loading-indicator': 'https://npmcdn.com/angular2-cool-loading-indicator@latest',
-      'angular2-cool-http': 'https://npmcdn.com/angular2-cool-http@latest'
+      'angular2-cool-http': 'https://npmcdn.com/angular2-cool-http@latest',
+      'ngx-accordion': 'node_modules/ngx-accordion',
+       "primeng": "node_modules/primeng"
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -45,6 +47,10 @@
           }
         }
       },
+      'ngx-accordion': {
+        main: 'index.js', 
+        defaultExtension: 'js' 
+        },
       rxjs: {
         defaultExtension: 'js'
       },
@@ -56,6 +62,10 @@
       main: 'index.js',
       defaultExtension: 'js'
       },
+          'node_modules/primeng': {
+            format: 'cjs',
+            defaultExtension: 'js'
+          },
     'angular2-cool-http': {
       main: 'index.js',
       defaultExtension: 'js'

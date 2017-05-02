@@ -30,7 +30,8 @@ export class ManagerUserComponent implements OnInit {
 
     getUserDetail(user: User) {
         this.showDetail = true;
-        this.userSelected = user;
+        this.userSelected = new User(user);
+        console.log(this.userSelected);
     }
 
     removeUser(user: User) {
@@ -46,15 +47,16 @@ export class ManagerUserComponent implements OnInit {
         )
     }
 
-    updateUser(form: any) {
-        form.username = this.userSelected.username;
-        form.id = this.userSelected.id;
+    updateUser(obj: any) {
+        console.log(new User(obj));
+        obj.username = this.userSelected.username;
+        obj.id = this.userSelected.id;
         this.atualizarAlert('Atualizando usuário...', "alert-info")
-        this._userService.updateUser(new User(form)).subscribe(
+        this._userService.updateUser(new User(obj)).subscribe(
             data => { },
             error => { this.atualizarAlert(error, "alert-danger") },
             () => {
-                this.atualizarAlert('Usuário ' + form.name + ' atualizado com sucesso !', "alert-info")
+                this.atualizarAlert('Usuário ' + obj.name + ' atualizado com sucesso !', "alert-info")
                 this.rows = this._userService.loadUsers();
             }
         )
