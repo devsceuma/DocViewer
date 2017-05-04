@@ -21,7 +21,7 @@ export class Method{
         this.author = obj.author;
         this.url = obj.url;
         this.modifier = obj.modifier;
-        this.onSucess = obj.onSucess;
+        this.onSucess = obj.onSuccess;
         if(typeof obj.parameters != 'undefined'){
             obj.parameters.forEach((parameter:any)=>this.parameters.push(new Parameter(parameter)));
         }

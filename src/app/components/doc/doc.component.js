@@ -16,44 +16,30 @@ var User_1 = require("./../../models/User");
 var Project_1 = require("./../../models/Project");
 var DocumentationService_1 = require("../../service/DocumentationService");
 var ProjectDocumented_1 = require("./../../models/ProjectDocumented");
+var auth_guard_1 = require("./../../auth.guard");
 var DocComponent = (function () {
-    function DocComponent(router, _loginService, _documentationService) {
+    function DocComponent(router, _loginService, _documentationService, _authGuard) {
         this.router = router;
         this._loginService = _loginService;
         this._documentationService = _documentationService;
+        this._authGuard = _authGuard;
         this.renderMethod = true;
         this.renderConstructor = true;
         this.filter = { type: '', value: '' };
-        this.autenticate = true;
-        this.userGenerated = { id: "5904c8c2eedce401888056ce",
-            name: "Marcus Vinicius Cartagenes",
-            username: "marcus",
-            password: "202cb962ac59075b964b07152d234b70",
-            email: "mvcartagenes@gmail.com",
-            organization: "Universidade Ceuma",
-            job: "Desenvolvedor de Sistemas",
-            projects: [{ "id": "59049fddeedce43b1645b591",
-                    url: "www.ceuma.br/ServicosOnline",
-                    name: "ServicosOnline" }],
-            profile: "AD" };
     }
     DocComponent.prototype.ngOnInit = function () {
-        if (this.autenticate) {
-            if (localStorage.getItem("currentUser") != null) {
-                this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
-            }
-            else {
-                this.router.navigate(['']);
-            }
+        if (!this._authGuard.enableAuth) {
+            this.user = new User_1.User(this._authGuard.userGenerated);
         }
         else {
-            this.user = new User_1.User(this.userGenerated);
+            this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
         }
     };
     DocComponent.prototype.loadDocumentation = function (obj) {
         var _this = this;
+        console.log(obj);
         this._documentationService.getDoc(new Project_1.Project(obj.projeto))
-            .subscribe(function (data) { _this.currentProject = new ProjectDocumented_1.ProjectDocumented(data); _this.currentProjectSafety = data; }, function (error) { });
+            .subscribe(function (data) { _this.currentProject = new ProjectDocumented_1.ProjectDocumented(data); _this.currentProjectSafety = data; console.log(_this.currentProject); }, function (error) { });
     };
     DocComponent.prototype.filterDocument = function (obj) {
         var _this = this;
@@ -93,7 +79,7 @@ DocComponent = __decorate([
         styleUrls: ['./style_layout.css', './style_responsive.css', './style.css'],
         providers: [LoginService_1.LoginService, DocumentationService_1.DocumentationService]
     }),
-    __metadata("design:paramtypes", [router_1.Router, LoginService_1.LoginService, DocumentationService_1.DocumentationService])
+    __metadata("design:paramtypes", [router_1.Router, LoginService_1.LoginService, DocumentationService_1.DocumentationService, auth_guard_1.AuthGuard])
 ], DocComponent);
 exports.DocComponent = DocComponent;
 //# sourceMappingURL=doc.component.js.map

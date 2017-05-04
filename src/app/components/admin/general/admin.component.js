@@ -13,40 +13,19 @@ var core_1 = require("@angular/core");
 var User_1 = require("./../../../models/User");
 var LoginService_1 = require("./../../../service/LoginService");
 var router_1 = require("@angular/router");
+var auth_guard_1 = require("./../../../auth.guard");
 var AdminComponent = (function () {
-    function AdminComponent(_router, _userService) {
+    function AdminComponent(_router, _userService, _authGuard) {
         this._router = _router;
         this._userService = _userService;
-        this.autenticateAdmin = false;
-        this.userGenerated = { id: "5904c8c2eedce401888056ce",
-            name: "Marcus Vinicius Cartagenes",
-            username: "marcus",
-            password: "202cb962ac59075b964b07152d234b70",
-            email: "mvcartagenes@gmail.com",
-            organization: "Universidade Ceuma",
-            job: "Desenvolvedor de Sistemas",
-            projects: [{ "id": "59049fddeedce43b1645b591",
-                    url: "www.ceuma.br/ServicosOnline",
-                    name: "ServicosOnline" }],
-            profile: "AD" };
+        this._authGuard = _authGuard;
     }
     AdminComponent.prototype.ngOnInit = function () {
-        this.validateSession();
-    };
-    AdminComponent.prototype.validateSession = function () {
-        if (this.autenticateAdmin) {
-            if (localStorage.getItem("currentUser") != null) {
-                this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
-                if (this.user.profile != 'AD') {
-                    this._router.navigate(['']);
-                }
-            }
-            else {
-                this._router.navigate(['']);
-            }
+        if (!this._authGuard.enableAuth) {
+            this.user = new User_1.User(this._authGuard.userGenerated);
         }
         else {
-            this.user = new User_1.User(this.userGenerated);
+            this.user = new User_1.User(JSON.parse(localStorage.getItem("currentUser")));
         }
     };
     AdminComponent.prototype.logout = function () {
@@ -61,7 +40,7 @@ AdminComponent = __decorate([
         styleUrls: ['./../../../../assets/css/light-bootstrap-dashboard.css', './../../../../assets/css/demo.css'],
         providers: [LoginService_1.LoginService]
     }),
-    __metadata("design:paramtypes", [router_1.Router, LoginService_1.LoginService])
+    __metadata("design:paramtypes", [router_1.Router, LoginService_1.LoginService, auth_guard_1.AuthGuard])
 ], AdminComponent);
 exports.AdminComponent = AdminComponent;
 //# sourceMappingURL=admin.component.js.map

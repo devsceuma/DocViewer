@@ -2,8 +2,7 @@
 
   <h2>Gerenciar Usuários</h2>
   <hr/>
-  <div class="alert {{message.severity}}" role="alert" *ngIf="message.message.length>0 ">{{message.message}}</div>
-  
+  <p-messages [value]="msgs" sticky="sticky" styleClass="ui-growl-image"></p-messages>
   <!-- PANEL -->
   <div class="panel panel-default">
     <!-- TABLE START -->
@@ -26,6 +25,9 @@
           <th style="width: 20%">
             <mfDefaultSorter by="city">Cargo</mfDefaultSorter>
           </th>
+          <th style="width: 1%">
+            <mfDefaultSorter by="city">Perfil</mfDefaultSorter>
+          </th>
           <th style="width: 3%"></th>
           <th style="width: 3%"></th>
         </tr>
@@ -38,6 +40,7 @@
             <td>{{item.username}}</td>
             <td>{{item.organization | uppercase}}</td>
             <td>{{item.job}}</td>
+            <td>{{item.profile}}</td>
             <td>
               <button (click)="getUserDetail(item)" class="btn btn-info btn-fill"><span class="glyphicon glyphicon-cog"></span></button>
             </td>
@@ -58,70 +61,79 @@
   </div>
 
 <p-tabView  *ngIf="userSelected">
-    <p-tabPanel header="Dados Pessoais {{userSelected.name}}">
-                  <form #form="ngForm" (ngSubmit)="updateUser(form.value)"  method="POST">
-                      <div class="row">
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label>Nome Completo</label>
-                                    <input type="text" name="name" required="required" [(ngModel)]="userSelected.name" class="form-control" ngModel>
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label for="exampleInputEmail">Email</label>
-                                  <input type="email" [(ngModel)]="userSelected.email" class="form-control" name="email" ngModel>
-                              </div>
-                          </div>
-                          <div class="col-md-4">
-                              <div class="form-group">
-                                  <label>Empresa</label>
-                                  <input type="text" class="form-control" [(ngModel)]="userSelected.organization" name="organization" placeholder="Universidade Ceuma" ngModel>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-md-3">
-                              <div class="form-group">
-                                  <label>Cargo</label>
-                                  <input type="text" class="form-control" [(ngModel)]="userSelected.job" name="job" ngModel>
-                              </div>
-                          </div>
-                          <div class="col-md-3">
-                              <div class="form-group">
-                                  <label>Senha</label>
-                                  <input type="password" name="password" [(ngModel)]="userSelected.password" class="form-control" ngModel>
-                              </div>
-                          </div>
-                      </div>
-                      <button type="submit" class="btn btn-info btn-fill pull-right" id="load">Atualizar Usuário</button>
-                      <div class="clearfix"></div>
-                  </form>
+    <p-tabPanel header="Dados Pessoais">
+        <form #form="ngForm" (ngSubmit)="updateUser(form.value)"  method="POST">
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                          <input type="text" name="name" [(ngModel)]="userSelected.name" class="form-control" ngModel>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="exampleInputEmail">Email</label>
+                        <input type="email" [(ngModel)]="userSelected.email" class="form-control" name="email" ngModel>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Empresa</label>
+                        <input type="text" class="form-control" [(ngModel)]="userSelected.organization" name="organization" placeholder="Universidade Ceuma" ngModel>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Perfil</label>
+                        <select class="form-control" name="profile" [(ngModel)]="userSelected.profile"ngModel>
+                            <option value="UN">Usuário Normal</option>
+                            <option value="AD">Administrador</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Cargo</label>
+                        <input type="text" class="form-control" [(ngModel)]="userSelected.job" name="job" ngModel>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Senha</label>
+                        <input type="password" name="password" [(ngModel)]="userSelected.password" class="form-control" ngModel>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-info btn-fill pull-right" id="load">Atualizar Usuário</button>
+            <div class="clearfix"></div>
+        </form>
     </p-tabPanel>
     <p-tabPanel header="Gerenciar Permissões">
-        <form #form="ngForm" (ngSubmit)="updateUser(userSelected)"  method="POST">
-                    <table class="table table-hover">
-                      <thead>
-                          <tr>
-                            <th>Projeto</th>
-                            <th>URL</th>
-                            <th>Permissão</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr *ngFor="let item of projects">
-                              <td>{{item.name}}</td>
-                              <td>{{item.url}}</td>
-                              <td>
-                                <label class="switch">
-                                  <input type="checkbox" [checked]="permissionAlreadyAssigned(item)"  (change)="switchPermission(item)" value="item">
-                                  <div class="slider round"></div>
-                                </label>
-                              </td>
-                          </tr>
-                      </tbody>
-                    </table>
-                    <button type="submit" class="btn btn-info btn-fill pull-right" id="load">Atualizar Usuário</button>
-          </form>
+      <table class="table table-hover">
+        <thead>
+            <tr>
+              <th>Projeto</th>
+              <th>URL</th>
+              <th>Permissão</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of projects">
+                <td>{{item.name}}</td>
+                <td>{{item.url}}</td>
+                <td>
+                  <label class="switch">
+                    <input type="checkbox" [checked]="permissionAlreadyAssigned(item)"  (change)="switchPermission(item)" value="item">
+                    <div class="slider round"></div>
+                  </label>
+                </td>
+            </tr>
+        </tbody>
+      </table>
     </p-tabPanel>
 </p-tabView>

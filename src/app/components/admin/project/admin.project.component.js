@@ -17,6 +17,7 @@ var ProjectComponent = (function () {
         this._projectService = _projectService;
         this.msgs = [];
         this.projects = [];
+        this.mfSortOrder = 'asc';
     }
     ProjectComponent.prototype.ngOnInit = function () {
         this.projects = this._projectService.loadProjects();
@@ -32,7 +33,7 @@ var ProjectComponent = (function () {
         else {
             var project_1 = new Project_1.Project(form);
             this._projectService.saveProject(project_1).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, 'error'); }, function () {
-                _this.atualizarAlert('Projeto salvo com sucesso', 'error');
+                _this.atualizarAlert('Projeto salvo com sucesso', 'info');
                 _this.projects.push(project_1);
             });
         }
@@ -43,8 +44,10 @@ var ProjectComponent = (function () {
         this._projectService.updateProject(new Project_1.Project(event));
     };
     ProjectComponent.prototype.updateProject = function (project) {
-        var pj = new Project_1.Project(project);
-        console.log(pj);
+        var _this = this;
+        this._projectService.updateProject(this.projectSelected).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, 'error'); }, function () {
+            _this.atualizarAlert('Projeto atualizado com sucesso !', 'info');
+        });
     };
     ProjectComponent.prototype.removeProject = function (project) {
         var _this = this;
@@ -55,6 +58,7 @@ var ProjectComponent = (function () {
         });
     };
     ProjectComponent.prototype.atualizarAlert = function (mensagem, severity) {
+        this.msgs = [];
         this.msgs.push({ summary: 'Atenção!', detail: mensagem, severity: severity });
     };
     return ProjectComponent;

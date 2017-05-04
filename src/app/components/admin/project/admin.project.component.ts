@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Project} from './../../../models/Project';
 import {ProjectService} from './../../../service/ProjectService';
 import {Message} from 'primeng/primeng';
+import {AuthGuard} from './../../../auth.guard';
 
 @Component({
     selector:'project-component',
@@ -14,6 +15,7 @@ export class ProjectComponent implements OnInit{
     msgs:Message[] = [];
     projects:Project[] = [];
     projectSelected:Project;
+    mfSortOrder:string ='asc';
 
     constructor(private _projectService:ProjectService){}
 
@@ -33,7 +35,7 @@ export class ProjectComponent implements OnInit{
                 data=>{},
                 error=>{this.atualizarAlert(error,'error')},
                 ()=>{
-                    this.atualizarAlert('Projeto salvo com sucesso','error');
+                    this.atualizarAlert('Projeto salvo com sucesso','info');
                     this.projects.push(project);
                 }
             )
@@ -48,8 +50,13 @@ export class ProjectComponent implements OnInit{
     }
 
     updateProject(project:any){
-        let pj = new Project(project);
-        console.log(pj);
+        this._projectService.updateProject(this.projectSelected).subscribe(
+            data=>{},
+            error=>{this.atualizarAlert(error,'error')},
+            ()=>{
+                this.atualizarAlert('Projeto atualizado com sucesso !','info');
+            }
+        )
     }
 
     removeProject(project: Project) {
@@ -65,6 +72,7 @@ export class ProjectComponent implements OnInit{
     }
 
     atualizarAlert(mensagem:string, severity:string){
+        this.msgs = [];
         this.msgs.push({summary:'Atenção!',detail:mensagem,severity:severity});
     }
 

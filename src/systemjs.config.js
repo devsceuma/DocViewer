@@ -35,7 +35,8 @@
       'angular2-cool-loading-indicator': 'https://npmcdn.com/angular2-cool-loading-indicator@latest',
       'angular2-cool-http': 'https://npmcdn.com/angular2-cool-http@latest',
       'ngx-accordion': 'node_modules/ngx-accordion',
-       "primeng": "node_modules/primeng"
+      "primeng": "node_modules/primeng",
+	  'ts-md5': 'npm:ts-md5'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -69,6 +70,11 @@
     'angular2-cool-http': {
       main: 'index.js',
       defaultExtension: 'js'
+    },
+'ts-md5': { 
+      map: { 
+        './md5': './dist/md5.js'
+      }
     }
     }
   });

@@ -16,14 +16,12 @@ var login_component_1 = require("./components/login/login.component");
 var doc_component_1 = require("./components/doc/doc.component");
 var app_component_1 = require("./app.component");
 var primeng_1 = require("primeng/primeng");
-var tab_1 = require("./components/admin/manager-user/tab");
-var tabs_1 = require("./components/admin/manager-user/tabs");
 var admin_component_1 = require("./components/admin/general/admin.component");
 var admin_project_component_1 = require("./components/admin/project/admin.project.component");
 var admin_register_user_component_1 = require("./components/admin/register-user/admin.register.user.component");
 var admin_manager_user_component_1 = require("./components/admin/manager-user/admin.manager.user.component");
 var routes_general_1 = require("./routes.general");
-var routes_general_2 = require("./routes.general");
+var auth_guard_1 = require("./auth.guard");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -35,6 +33,7 @@ AppModule = __decorate([
             angular2_datatable_1.DataTableModule,
             platform_browser_1.BrowserModule,
             animations_1.BrowserAnimationsModule,
+            primeng_1.InputTextModule,
             primeng_1.TabViewModule,
             forms_1.FormsModule,
             primeng_1.GrowlModule,
@@ -43,8 +42,7 @@ AppModule = __decorate([
             http_1.JsonpModule,
             primeng_1.MessagesModule,
             primeng_1.AccordionModule,
-            routes_general_1.routing,
-            routes_general_2.admin_routing
+            routes_general_1.routing
         ],
         declarations: [
             app_component_1.AppComponent,
@@ -53,10 +51,9 @@ AppModule = __decorate([
             admin_component_1.AdminComponent,
             admin_register_user_component_1.RegisterUserComponent,
             admin_manager_user_component_1.ManagerUserComponent,
-            admin_project_component_1.ProjectComponent,
-            tab_1.Tab,
-            tabs_1.Tabs
+            admin_project_component_1.ProjectComponent
         ],
+        providers: [auth_guard_1.AuthGuard],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

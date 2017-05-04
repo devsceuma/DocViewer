@@ -6,20 +6,16 @@ import {AdminComponent} from './components/admin/general/admin.component';
 import {ProjectComponent} from './components/admin/project/admin.project.component';
 import {ManagerUserComponent} from './components/admin/manager-user/admin.manager.user.component';
 import {RegisterUserComponent} from './components/admin/register-user/admin.register.user.component';
+import {AuthGuard} from './auth.guard';
 
 const APP_ROUTES:Routes=[
-    { path:'doc', component:DocComponent},
-    { path:'admin', component:AdminComponent},
-    { path:'', component:LoginComponent }
-]
-
-const ADMIN_ROUTES:Routes=[
-    { path:'admin',component:AdminComponent,children:[
+    { path:'doc', component:DocComponent, canActivate:[AuthGuard]},
+    { path:'', component:LoginComponent },
+    { path:'admin',component:AdminComponent,canActivate: [AuthGuard],children:[
         {path:'add-user',component:RegisterUserComponent},
         {path:'manager-user',component:ManagerUserComponent},
         {path:'project',component:ProjectComponent}
     ]}
 ]
 
-export const admin_routing:ModuleWithProviders = RouterModule.forChild(ADMIN_ROUTES);
 export const routing:ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);

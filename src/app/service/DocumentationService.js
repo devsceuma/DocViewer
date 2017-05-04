@@ -29,11 +29,6 @@ var DocumentationService = (function (_super) {
     }
     DocumentationService.prototype.getDoc = function (project) {
         return this.getDocumentation(project.url);
-        /*.subscribe(data=>{
-             let project = new ProjectDocumented(data);
-             console.log(project);
-         })
-         return null;*/
     };
     return DocumentationService;
 }(Service_1.Service));

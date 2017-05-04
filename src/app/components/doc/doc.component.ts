@@ -5,10 +5,11 @@ import {User} from './../../models/User';
 import {Project} from './../../models/Project';
 import {DocumentationService} from '../../service/DocumentationService';
 import {ProjectDocumented} from './../../models/ProjectDocumented';
+import {AuthGuard} from './../../auth.guard';
 
 @Component({
     selector: 'doc',
-    templateUrl: './doc.html',
+    templateUrl:'./doc.html',
     styleUrls:['./style_layout.css','./style_responsive.css','./style.css'],
     providers:[LoginService,DocumentationService]
 })
@@ -20,43 +21,24 @@ export class DocComponent implements OnInit{
     private filter={type:'',value:''}
     private currentProject:ProjectDocumented;
     private currentProjectSafety:any;
-
     private user:User;
-    private autenticate:boolean = true;
-    
-    
-    
-    private userGenerated={id:"5904c8c2eedce401888056ce",
-            name:"Marcus Vinicius Cartagenes",
-            username:"marcus",
-            password:"202cb962ac59075b964b07152d234b70",
-            email:"mvcartagenes@gmail.com",
-            organization:"Universidade Ceuma",
-            job:"Desenvolvedor de Sistemas",
-            projects:[{"id":"59049fddeedce43b1645b591",
-            url:"www.ceuma.br/ServicosOnline",
-            name:"ServicosOnline"}],
-            profile:"AD"};
 
 
-    constructor(private router: Router, private _loginService:LoginService, private _documentationService:DocumentationService) { }
+    constructor(private router: Router, private _loginService:LoginService, private _documentationService:DocumentationService, private _authGuard:AuthGuard) { }
 
     ngOnInit(){
-        if(this.autenticate){
-            if(localStorage.getItem("currentUser") != null){
-                this.user = new User(JSON.parse(localStorage.getItem("currentUser")));
-            }else{
-                this.router.navigate(['']);
-            }
+        if(!this._authGuard.enableAuth){
+            this.user = new User(this._authGuard.userGenerated);
         }else{
-            this.user = new User(this.userGenerated);
+            this.user = new User(JSON.parse(localStorage.getItem("currentUser")));
         }
     }
 
     loadDocumentation(obj:any){
+        console.log(obj);
         this._documentationService.getDoc(new Project(obj.projeto))
         .subscribe(
-        data=>{this.currentProject = new ProjectDocumented(data); this.currentProjectSafety = data},
+        data=>{this.currentProject = new ProjectDocumented(data); this.currentProjectSafety = data;console.log(this.currentProject)},
         error=>{ /*TODO TRATAR ERROR */});
     }
 

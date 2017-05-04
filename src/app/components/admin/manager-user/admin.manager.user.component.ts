@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from './../../../service/UserService';
 import { ProjectService } from './../../../service/ProjectService';
 import { User } from './../../../models/User';
+import {Message} from 'primeng/primeng';
 import { Project } from './../../../models/Project';
 
 @Component({
@@ -12,12 +13,11 @@ import { Project } from './../../../models/Project';
 })
 export class ManagerUserComponent implements OnInit {
 
-    projects: Project[] = [];
-    rows: User[] = [];
-    userSelected: User;
-    message = { message: '', severity: '' }
-    public sortOrder = "asc";
-    showDetail: boolean = false;
+    private msgs:Message[] = [];
+    private projects: Project[] = [];
+    private rows: User[] = [];
+    private userSelected: User;
+    private sortOrder = "asc";
 
     constructor(private _userService: UserService, private _projectService: ProjectService) {
 
@@ -28,13 +28,11 @@ export class ManagerUserComponent implements OnInit {
         this.projects = this._projectService.loadProjects();
     }
 
-    getUserDetail(user: User) {
-        this.showDetail = true;
+    private getUserDetail(user: User) {
         this.userSelected = new User(user);
-        console.log(this.userSelected);
     }
 
-    removeUser(user: User) {
+    private removeUser(user: User) {
         this.atualizarAlert('Deletando usuário...', "alert-info")
         this._userService.deleteUser(user).subscribe(
             data => { },
@@ -42,27 +40,25 @@ export class ManagerUserComponent implements OnInit {
             () => {
                 this.atualizarAlert('Usuário ' + user.name + ' deletado com sucesso !', "alert-info")
                 this.rows.splice(this.rows.indexOf(user), 1);
-                this.showDetail = false;
             }
         )
     }
 
-    updateUser(obj: any) {
-        console.log(new User(obj));
+    private updateUser(obj: any) {
         obj.username = this.userSelected.username;
         obj.id = this.userSelected.id;
-        this.atualizarAlert('Atualizando usuário...', "alert-info")
+        this.atualizarAlert('Atualizando usuário...', "info")
         this._userService.updateUser(new User(obj)).subscribe(
             data => { },
-            error => { this.atualizarAlert(error, "alert-danger") },
+            error => { this.atualizarAlert(error, "error") },
             () => {
-                this.atualizarAlert('Usuário ' + obj.name + ' atualizado com sucesso !', "alert-info")
+                this.atualizarAlert('Usuário ' + obj.name + ' atualizado com sucesso !', "info")
                 this.rows = this._userService.loadUsers();
             }
         )
     }
 
-    switchPermission(project: Project) {
+    private switchPermission(project: Project) {
         if(this.permissionAlreadyAssigned(project)){
             this.userSelected.projects.splice(this.userSelected.projects.indexOf(project),1);
         }else{
@@ -71,13 +67,14 @@ export class ManagerUserComponent implements OnInit {
             }
             this.userSelected.projects.push(project);
         }
+        this.updateUser(this.userSelected);
     }
 
-    permissionAlreadyAssigned(project: Project){
+    private permissionAlreadyAssigned(project: Project){
         let status:boolean = false;
         if(this.userSelected.projects != null){
-            this.userSelected.projects.filter(item =>{
-                if(item.name == project.name){
+            this.userSelected.projects.forEach(item =>{
+                if(item.id === project.id){
                     status = true;
                 }
             });
@@ -85,8 +82,9 @@ export class ManagerUserComponent implements OnInit {
         return status;
     }
 
-    atualizarAlert(mensagem: string, severity: string) {
-        this.message.message = mensagem;
-        this.message.severity = severity;
+    private atualizarAlert(mensagem:string, severity:string){
+        this.msgs = [];
+        this.msgs.push({summary:'Atenção!',detail:mensagem,severity:severity});
     }
+
 }

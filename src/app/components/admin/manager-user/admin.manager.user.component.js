@@ -17,20 +17,17 @@ var ManagerUserComponent = (function () {
     function ManagerUserComponent(_userService, _projectService) {
         this._userService = _userService;
         this._projectService = _projectService;
+        this.msgs = [];
         this.projects = [];
         this.rows = [];
-        this.message = { message: '', severity: '' };
         this.sortOrder = "asc";
-        this.showDetail = false;
     }
     ManagerUserComponent.prototype.ngOnInit = function () {
         this.rows = this._userService.loadUsers();
         this.projects = this._projectService.loadProjects();
     };
     ManagerUserComponent.prototype.getUserDetail = function (user) {
-        this.showDetail = true;
         this.userSelected = new User_1.User(user);
-        console.log(this.userSelected);
     };
     ManagerUserComponent.prototype.removeUser = function (user) {
         var _this = this;
@@ -38,17 +35,15 @@ var ManagerUserComponent = (function () {
         this._userService.deleteUser(user).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
             _this.atualizarAlert('Usuário ' + user.name + ' deletado com sucesso !', "alert-info");
             _this.rows.splice(_this.rows.indexOf(user), 1);
-            _this.showDetail = false;
         });
     };
     ManagerUserComponent.prototype.updateUser = function (obj) {
         var _this = this;
-        console.log(new User_1.User(obj));
         obj.username = this.userSelected.username;
         obj.id = this.userSelected.id;
-        this.atualizarAlert('Atualizando usuário...', "alert-info");
-        this._userService.updateUser(new User_1.User(obj)).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, "alert-danger"); }, function () {
-            _this.atualizarAlert('Usuário ' + obj.name + ' atualizado com sucesso !', "alert-info");
+        this.atualizarAlert('Atualizando usuário...', "info");
+        this._userService.updateUser(new User_1.User(obj)).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, "error"); }, function () {
+            _this.atualizarAlert('Usuário ' + obj.name + ' atualizado com sucesso !', "info");
             _this.rows = _this._userService.loadUsers();
         });
     };
@@ -62,12 +57,13 @@ var ManagerUserComponent = (function () {
             }
             this.userSelected.projects.push(project);
         }
+        this.updateUser(this.userSelected);
     };
     ManagerUserComponent.prototype.permissionAlreadyAssigned = function (project) {
         var status = false;
         if (this.userSelected.projects != null) {
-            this.userSelected.projects.filter(function (item) {
-                if (item.name == project.name) {
+            this.userSelected.projects.forEach(function (item) {
+                if (item.id === project.id) {
                     status = true;
                 }
             });
@@ -75,8 +71,8 @@ var ManagerUserComponent = (function () {
         return status;
     };
     ManagerUserComponent.prototype.atualizarAlert = function (mensagem, severity) {
-        this.message.message = mensagem;
-        this.message.severity = severity;
+        this.msgs = [];
+        this.msgs.push({ summary: 'Atenção!', detail: mensagem, severity: severity });
     };
     return ManagerUserComponent;
 }());

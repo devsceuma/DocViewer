@@ -14,12 +14,6 @@ export class DocumentationService extends Service{
 
     getDoc(project:Project):Observable<any>{
         return this.getDocumentation(project.url);
-        
-       /*.subscribe(data=>{
-            let project = new ProjectDocumented(data);
-            console.log(project);
-        })
-        return null;*/
     }
 
 }

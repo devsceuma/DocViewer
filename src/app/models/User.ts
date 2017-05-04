@@ -6,7 +6,7 @@ export class User{
     name:string;
     username:string;
     email:string;
-    password:string;
+    password:any;
     organization:string;
     job:string;
     profile:string;

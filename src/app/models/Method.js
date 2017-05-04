@@ -13,7 +13,7 @@ var Method = (function () {
         this.author = obj.author;
         this.url = obj.url;
         this.modifier = obj.modifier;
-        this.onSucess = obj.onSucess;
+        this.onSucess = obj.onSuccess;
         if (typeof obj.parameters != 'undefined') {
             obj.parameters.forEach(function (parameter) { return _this.parameters.push(new Parameter_1.Parameter(parameter)); });
         }
