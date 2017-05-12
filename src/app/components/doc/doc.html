@@ -78,9 +78,11 @@
                                     <span class="glyphicon glyphicon-globe"></span> <b>URL:</b> {{currentProject.url}}{{classe.url}}{{method.url}}<br/>
                                 </div>
 
-                                <div class="method-info">
-                                    <span class="glyphicon glyphicon-export"></span> <b>TypeRequest:</b> {{method.typesRequest}}
+                                <div class="request {{getClassByTypeRequest(method.typesRequest)}}">
+                                    <span class="glyphicon glyphicon-export"></span><b>TypeRequest:</b> {{method.typesRequest}}
                                 </div>
+
+
                                 <br/>
                                 <h4> <b>Parâmetros</b> </h4>
                                 <hr/>

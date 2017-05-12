@@ -34,7 +34,7 @@ export class DocComponent implements OnInit{
         }
     }
 
-    loadDocumentation(obj:any){
+    private loadDocumentation(obj:any){
         console.log(obj);
         this._documentationService.getDoc(new Project(obj.projeto))
         .subscribe(
@@ -42,7 +42,7 @@ export class DocComponent implements OnInit{
         error=>{ /*TODO TRATAR ERROR */});
     }
 
-    filterDocument(obj:any){
+    private filterDocument(obj:any){
         if(obj.value === "" || obj.type === ""){
             this.currentProject = new ProjectDocumented(this.currentProjectSafety);
         }
@@ -63,6 +63,19 @@ export class DocComponent implements OnInit{
             })
         }else{
             this.currentProject = new ProjectDocumented(this.currentProjectSafety);
+        }
+    }
+
+    private getClassByTypeRequest(typeRequest:string):string{
+
+        if(typeRequest == 'GET'){
+            return 'get';
+        }else if(typeRequest == 'POST'){
+            return 'post';
+        }else if(typeRequest == 'PUT'){
+            return 'put';
+        }else if (typeRequest == 'DELETE'){
+            return 'delete';
         }
     }
 

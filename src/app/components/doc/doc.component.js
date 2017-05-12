@@ -67,6 +67,20 @@ var DocComponent = (function () {
             this.currentProject = new ProjectDocumented_1.ProjectDocumented(this.currentProjectSafety);
         }
     };
+    DocComponent.prototype.getClassByTypeRequest = function (typeRequest) {
+        if (typeRequest == 'GET') {
+            return 'get';
+        }
+        else if (typeRequest == 'POST') {
+            return 'post';
+        }
+        else if (typeRequest == 'PUT') {
+            return 'put';
+        }
+        else if (typeRequest == 'DELETE') {
+            return 'delete';
+        }
+    };
     DocComponent.prototype.deslogar = function () {
         this._loginService.signout();
     };

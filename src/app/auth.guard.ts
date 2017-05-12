@@ -8,7 +8,6 @@ export class AuthGuard implements CanActivate{
     public userGenerated={id:"5904c8c2eedce401888056ce",
             name:"Marcus Vinicius Cartagenes",
             username:"marcus",
-            password:"202cb962ac59075b964b07152d234b70",
             email:"mvcartagenes@gmail.com",
             organization:"Universidade Ceuma",
             job:"Desenvolvedor de Sistemas",

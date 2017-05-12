@@ -47,12 +47,12 @@ export class ManagerUserComponent implements OnInit {
     private updateUser(obj: any) {
         obj.username = this.userSelected.username;
         obj.id = this.userSelected.id;
-        this.atualizarAlert('Atualizando usuário...', "info")
+        this.atualizarAlert('Atualizando usuário...', "alert-info")
         this._userService.updateUser(new User(obj)).subscribe(
             data => { },
             error => { this.atualizarAlert(error, "error") },
             () => {
-                this.atualizarAlert('Usuário ' + obj.name + ' atualizado com sucesso !', "info")
+                this.atualizarAlert('Usuário ' + obj.name + ' atualizado com sucesso !', "alert-info")
                 this.rows = this._userService.loadUsers();
             }
         )
@@ -70,7 +70,7 @@ export class ManagerUserComponent implements OnInit {
         this.updateUser(this.userSelected);
     }
 
-    private permissionAlreadyAssigned(project: Project){
+    private permissionAlreadyAssigned(project: Project):boolean{
         let status:boolean = false;
         if(this.userSelected.projects != null){
             this.userSelected.projects.forEach(item =>{

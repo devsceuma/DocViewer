@@ -41,9 +41,9 @@ var ManagerUserComponent = (function () {
         var _this = this;
         obj.username = this.userSelected.username;
         obj.id = this.userSelected.id;
-        this.atualizarAlert('Atualizando usuário...', "info");
+        this.atualizarAlert('Atualizando usuário...', "alert-info");
         this._userService.updateUser(new User_1.User(obj)).subscribe(function (data) { }, function (error) { _this.atualizarAlert(error, "error"); }, function () {
-            _this.atualizarAlert('Usuário ' + obj.name + ' atualizado com sucesso !', "info");
+            _this.atualizarAlert('Usuário ' + obj.name + ' atualizado com sucesso !', "alert-info");
             _this.rows = _this._userService.loadUsers();
         });
     };
