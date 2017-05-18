@@ -12,7 +12,8 @@ import {AdminComponent} from './components/admin/general/admin.component';
 import {ProjectComponent} from './components/admin/project/admin.project.component';
 import {RegisterUserComponent} from './components/admin/register-user/admin.register.user.component';
 import {ManagerUserComponent} from './components/admin/manager-user/admin.manager.user.component';
-import { RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
+import {Ng2PageScrollModule} from 'ng2-page-scroll';
 import {routing} from './routes.general';
 import {AuthGuard} from './auth.guard';
 
@@ -25,7 +26,8 @@ import {AuthGuard} from './auth.guard';
   TabViewModule,
   FormsModule,
   GrowlModule,
-  PanelModule, 
+  PanelModule,
+  Ng2PageScrollModule,
   HttpModule, 
   JsonpModule,
   MessagesModule,
@@ -40,7 +42,7 @@ import {AuthGuard} from './auth.guard';
                   ManagerUserComponent,
                   ProjectComponent
                 ],
-  providers:    [AuthGuard],
+  providers:    [AuthGuard,Ng2PageScrollModule],
   bootstrap:    [AppComponent]
 })
 export class AppModule { }

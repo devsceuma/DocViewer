@@ -20,6 +20,7 @@ var admin_component_1 = require("./components/admin/general/admin.component");
 var admin_project_component_1 = require("./components/admin/project/admin.project.component");
 var admin_register_user_component_1 = require("./components/admin/register-user/admin.register.user.component");
 var admin_manager_user_component_1 = require("./components/admin/manager-user/admin.manager.user.component");
+var ng2_page_scroll_1 = require("ng2-page-scroll");
 var routes_general_1 = require("./routes.general");
 var auth_guard_1 = require("./auth.guard");
 var AppModule = (function () {
@@ -38,6 +39,7 @@ AppModule = __decorate([
             forms_1.FormsModule,
             primeng_1.GrowlModule,
             primeng_1.PanelModule,
+            ng2_page_scroll_1.Ng2PageScrollModule,
             http_1.HttpModule,
             http_1.JsonpModule,
             primeng_1.MessagesModule,
@@ -53,7 +55,7 @@ AppModule = __decorate([
             admin_manager_user_component_1.ManagerUserComponent,
             admin_project_component_1.ProjectComponent
         ],
-        providers: [auth_guard_1.AuthGuard],
+        providers: [auth_guard_1.AuthGuard, ng2_page_scroll_1.Ng2PageScrollModule],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var ng2_page_scroll_1 = require("ng2-page-scroll");
 var router_1 = require("@angular/router");
 var LoginService_1 = require("./../../service/LoginService");
 var User_1 = require("./../../models/User");
@@ -67,18 +68,18 @@ var DocComponent = (function () {
             this.currentProject = new ProjectDocumented_1.ProjectDocumented(this.currentProjectSafety);
         }
     };
-    DocComponent.prototype.getClassByTypeRequest = function (typeRequest) {
+    DocComponent.prototype.getSeverityByTypeRequest = function (typeRequest) {
         if (typeRequest == 'GET') {
-            return 'get';
+            return 'success';
         }
         else if (typeRequest == 'POST') {
-            return 'post';
+            return 'warning';
         }
         else if (typeRequest == 'PUT') {
-            return 'put';
+            return 'info';
         }
         else if (typeRequest == 'DELETE') {
-            return 'delete';
+            return 'danger';
         }
     };
     DocComponent.prototype.deslogar = function () {
@@ -91,7 +92,8 @@ DocComponent = __decorate([
         selector: 'doc',
         templateUrl: './doc.html',
         styleUrls: ['./style_layout.css', './style_responsive.css', './style.css'],
-        providers: [LoginService_1.LoginService, DocumentationService_1.DocumentationService]
+        providers: [LoginService_1.LoginService, DocumentationService_1.DocumentationService, ng2_page_scroll_1.PageScrollService],
+        encapsulation: core_1.ViewEncapsulation.None
     }),
     __metadata("design:paramtypes", [router_1.Router, LoginService_1.LoginService, DocumentationService_1.DocumentationService, auth_guard_1.AuthGuard])
 ], DocComponent);

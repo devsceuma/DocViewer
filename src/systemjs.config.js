@@ -36,7 +36,8 @@
       'angular2-cool-http': 'https://npmcdn.com/angular2-cool-http@latest',
       'ngx-accordion': 'node_modules/ngx-accordion',
       "primeng": "node_modules/primeng",
-	  'ts-md5': 'npm:ts-md5'
+	  'ts-md5': 'npm:ts-md5',
+	  'ng2-page-scroll': 'npm:ng2-page-scroll/bundles/ng2-page-scroll.umd.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

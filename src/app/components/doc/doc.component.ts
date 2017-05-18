@@ -1,4 +1,5 @@
-import {Component, OnInit,trigger,state,style,transition,animate,keyframes} from '@angular/core'
+import {Component, OnInit,trigger,state,style,transition,animate,keyframes, ViewEncapsulation} from '@angular/core'
+import { PageScrollService, Ng2PageScrollModule } from 'ng2-page-scroll'
 import {Router, ActivatedRoute } from '@angular/router';
 import {LoginService} from './../../service/LoginService';
 import {User} from './../../models/User';
@@ -11,7 +12,8 @@ import {AuthGuard} from './../../auth.guard';
     selector: 'doc',
     templateUrl:'./doc.html',
     styleUrls:['./style_layout.css','./style_responsive.css','./style.css'],
-    providers:[LoginService,DocumentationService]
+    providers:[LoginService,DocumentationService,PageScrollService],
+    encapsulation: ViewEncapsulation.None
 })
 export class DocComponent implements OnInit{
 
@@ -66,16 +68,16 @@ export class DocComponent implements OnInit{
         }
     }
 
-    private getClassByTypeRequest(typeRequest:string):string{
+    private getSeverityByTypeRequest(typeRequest:string):string{
 
         if(typeRequest == 'GET'){
-            return 'get';
+            return 'success';
         }else if(typeRequest == 'POST'){
-            return 'post';
+            return 'warning';
         }else if(typeRequest == 'PUT'){
-            return 'put';
+            return 'info';
         }else if (typeRequest == 'DELETE'){
-            return 'delete';
+            return 'danger';
         }
     }
 
