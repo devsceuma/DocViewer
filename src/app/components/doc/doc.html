@@ -1,0 +1,171 @@
+        <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i>
+                    <!--<img src="assets/img/Ceuma-logo.png" width="50" class="img-logo" />-->
+                </div>
+            </div>
+
+            <!--logo start-->
+            <a class="logo" href="javascript:void(0);">Doc <span class="lite">Viewer</span></a>
+            <!--logo end-->
+
+            <div class="nav search-row" id="top_menu">
+                <!--  search form start -->
+                        <ul class="nav top-menu">
+                            <li>
+                                <form #form="ngForm"  class="navbar-form" (ngSubmit)="loadDocumentation(form.value)" method="POST">
+                                    <select class="form-control" name="projeto" id="selectClassMeth" ngModel>
+                                        <option *ngFor="let item of user.projects" [ngValue]="item">{{item.name}}</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-primary"> Buscar Documentação </button>
+                                    <div class="clearfix"></div>
+                               </form>
+                            </li>
+                        </ul>
+                <!--  search form end -->
+            </div>
+
+            <div class="top-nav notification-row">
+                <!-- notificatoin dropdown start-->
+                <ul class="nav pull-right top-menu">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle">
+                            Olá,{{user.name}}
+                        </a>
+                    </li>
+                    <li class="dropdown" *ngIf="user.profile === 'AD'">
+                         <button routerLink="/admin" class="btn btn-primary btn-fill dropdown-toggle">Painel Administrativo</button>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" (click)="deslogar()">
+                            <p>Sair</p>
+                        </a>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!-- notificatoin dropdown end-->
+            </div>
+        </header>
+
+        <!-- FINAL DO HEADER -->
+
+
+<section id="main-content" *ngIf="currentProject">
+    <section class="wrapper">
+
+        <!-- FORMULARIO DE FILTRO DE PROJETOS -->
+        <form #form="ngForm" (ngSubmit)="filterDocument(form.value)" method="POST">
+            <div class="row">
+                 <div class="col-md-2">
+                    <select [(ngModel)]="filter.type" name="type" class="form-control">
+                        <option value="CLASSE">Classe</option>
+                        <option value="METHOD">Método</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input [(ngModel)]="filter.value" name="value" type="text" class="form-control"/>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                </div>
+            </div>
+        </form>
+        <!-- FORMULARIO DE FILTRO DE PROJETOS -->
+
+        <!-- BREADCRUMB -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-laptop"></i> Projeto: {{currentProject.name}}</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                    <li><i class="fa fa-laptop"></i>Projeto: {{currentProject.name}}</li>						  	
+                </ol>
+            </div>
+        </div>
+        <!-- BREADCRUMB -->
+       <div class="row">
+            <div class="col-lg-12">
+                <!--Project Activity start-->
+                <section class="panel" *ngFor="let classe of currentProject.classes">
+                            <div class="panel-body progress-panel">
+                                <div class="row">
+                                    <div class="col-lg-8 task-progress pull-left">
+                                        <h1>{{classe.name}} - Classe</h1>                                  
+                                    </div>
+                                    <div class="col-lg-4">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-group m-bot20" id="accordion">                
+                                <div class="panel panel-{{getSeverityByTypeRequest(method.typesRequest)}}" *ngFor="let method of classe.methods">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{classe.name}}{{method.name}}" aria-expanded="false">
+                                                <i class="glyphicon glyphicon-export"></i>
+                                                <span class="badge bg-inverse"> {{method.typesRequest}}</span>                                                
+                                                {{method.description}}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="{{classe.name}}{{method.name}}" class="panel-collapse collapse">
+                                        <!-- METHODS INFO -->
+
+                                            <div class="panel-body">
+	                                  	<div class="list-group">
+										  <a class="list-group-item">
+										    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-link"></i> URL</h4>
+										    <p class="list-group-item-text text-primary">{{method.url}}</p><br>
+										    <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-list-alt"></i> Descrição</h4>
+										    <p class="list-group-item-text text-success">{{method.description}}</p><br>
+                                            <h4 class="list-group-item-heading"><i class="glyphicon glyphicon-link"></i> URL Montada</h4>
+                                            <p class="list-group-item-text text-danger">{{currentProject.url}}{{classe.url}}{{method.url}}</p>
+
+										  </a>
+										</div>
+
+	                                  	<h2>Parâmetros<span class="badge">{{method.parameters.length}}</span></h2>
+	                                     <table class="table table-hover">
+	                                     	<thead>
+		                                     	<tr>
+							                      	  <th>Nome</th>
+							                          <th>Descrição</th>
+							                          <th>Tipo</th>
+                                                      <th>Opcional</th>                      				                 
+							                      </tr>
+	                                     	</thead>
+						                      <tbody>						                      
+						                      <tr *ngFor="let param of method.parameters">
+                                                    <td>{{param.name}}</td>
+                                                    <td>{{param.description}}</td>
+                                                    <td>{{param.type}}</td>
+                                                    <td>{{param.optional}}</td>
+						                      </tr>					                      
+						                      </tbody>
+						                  </table>
+
+						                  <hr>
+
+	                                  		<h2>Responses <span class="badge">12</span></h2>
+
+		                                  		<div class="bs-callout bs-callout-success col-md-12">
+												  <h4>Default Callout</h4>
+												  This is a default callout.
+												</div>
+
+												<div class="bs-callout bs-callout-danger col-md-12">
+												  <h4>Default Callout</h4>
+											</div>
+	                              </div>
+
+                                        <!-- METHODS INFO -->
+                                    </div>
+                                </div>
+                            </div>
+                </section>
+            <!-- COL LG 12 -->
+            </div>
+	    </div>
+    </section>
+</section>
+<!-- EXIBIÇÃO DOS DADOS DO PROJETO -->

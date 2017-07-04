@@ -1,0 +1,70 @@
+<!-- WRAPPER -->
+<div class="wrapper">
+    <!-- SIDE IMAGE -->
+    <div class="sidebar" data-color="dark-blue" data-image="assets/img/sidebar-5.jpg">
+
+        <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="#" class="simple-text">
+                        DOC VIEWER
+                    </a>
+                </div>
+
+                <ul class="nav">
+                    <li>
+                        <a routerLink="/admin/add-user">
+                           <p><span class="glyphicon glyphicon-user"></span> Adicionar Usuario</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/admin/manager-user">
+                            <p><span class="glyphicon glyphicon-cog"></span> Gerenciar Usuario</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/admin/project">
+                             <p><span class="glyphicon glyphicon-file"></span> Projetos</p>
+                        </a>
+                    </li>
+                </ul>
+        </div>
+    </div>
+
+    <!-- END SIDE MENU -->
+
+    <div class="main-panel">
+		<nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a>
+                                <p>Olá, {{user.name}}</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/doc">
+                                <p>Voltar para a documentação</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" (click)="logout()">
+                                <p>Sair</p>
+                            </a>
+                        </li>
+						<li class="separator hidden-lg hidden-md"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+.request{
+    height:30px;
+    border-radius:3px;
+    padding:10px;
+    margin-bottom: 8px;
+}
+
+.get{
+    background-color: green;
+}
+
+.post{
+    background-color: red;
+}
+
+.put{
+    background-color: blue;
+}
+
+.delete{
+    background-color: gray;
+}

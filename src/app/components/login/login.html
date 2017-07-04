@@ -1,0 +1,17 @@
+<router-outlet></router-outlet>
+<div class="container">
+	<div class="login-container">
+            <div id="output"></div>
+            <img src="assets/images/logo_doc_viewer.jpg" alt="Logo DocViewer"/>
+            <div class="form-box">
+                <p-growl [value]="msgs" sticky="sticky"></p-growl>
+                <form (ngSubmit)="logar()" method="POST">
+                    <input name="user" [(ngModel)]="credentials.user" autocomplete="off" required="true" type="text" placeholder="Usuário">
+                    <input name="pwd" type="password" autocomplete="off" [(ngModel)]="credentials.pwd" required="true" placeholder="Senha">
+                    <button class="btn btn-info btn-block login" type="submit">Entrar</button>
+                </form>
+            </div>
+            <br>
+            
+        </div>
+</div>
